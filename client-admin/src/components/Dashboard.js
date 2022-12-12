@@ -4,6 +4,7 @@ import Products from "./Products";
 import Categories from "./Categories";
 import FormProducts from "./FormProducts";
 import FormCategories from "./FormCategories";
+import FormAdmin from "./FormAdmin";
 import { useEffect, useState } from "react";
 
 export default function Dashboard() {
@@ -42,11 +43,13 @@ export default function Dashboard() {
           <div className="mx-20 my-6">
             {/* <Products products={products} /> */}
 
-            <Categories categories={categories} />
+            {/* <Categories categories={categories} /> */}
 
             {/* <FormProducts categories={categories} /> */}
 
             {/* <FormCategories /> */}
+
+            <FormAdmin />
           </div>
         </div>
       </div>
