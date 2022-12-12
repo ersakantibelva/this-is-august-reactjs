@@ -3,8 +3,9 @@ import TableRowProducts from "./TableRowProducts";
 export default function TableProducts(props) {
   return (
     <>
-      <div className="overflow-x-auto overflow-y-auto w-full max-w-full">
-        <table className="table w-full">
+    
+      <div className="overflow-x-auto overflow-y-auto">
+        <table className="table w-[1366px]">
           <thead>
             <tr>
               <th>No</th>
@@ -25,6 +26,7 @@ export default function TableProducts(props) {
           </tbody>
         </table>
       </div>
+      
     </>
   );
 }

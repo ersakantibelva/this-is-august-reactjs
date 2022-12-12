@@ -7,7 +7,7 @@ export default function TableRowProducts(props) {
             {props.index + 1}
           </div>
         </td>
-        <td>
+        <td className="">
           <div className="flex items-center space-x-3">
             <div className="avatar">
               <div className="mask mask-squircle w-12 h-12">
@@ -33,8 +33,12 @@ export default function TableRowProducts(props) {
         <button className="btn btn-primary btn-sm">See Images</button>
         </td>
         <th>
+          <div className="flex flex-col gap-2">
           <button className="btn btn-warning btn-xs mr-2">Edit</button>
           <button className="btn btn-error btn-xs">Delete</button>
+
+          </div>
+          
         </th>
       </tr>
     </>

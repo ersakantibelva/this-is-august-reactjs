@@ -2,9 +2,9 @@ export default function Navbar() {
   return (
     <>
       <header aria-label="Site Header" className="border-b border-gray-100">
-        <div className="mx-auto flex h-16 max-w-screen-2xl items-center justify-between sm:px-6 lg:px-8">
+        <div className="mx-auto flex h-16 items-center justify-between">
           <div className="flex flex-1 items-center justify-end">
-            <div className="ml-8 flex items-center">
+            <div className="flex items-center">
               <div className="flex items-center divide-x divide-gray-100 border-x border-gray-100">
                 <span>
                   <a

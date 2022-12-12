@@ -17,19 +17,19 @@ Target:
 - [v] React: Class Component vs Function Component
 - [v] Mempelajari State menggunakan useState
 - [v] Mengirim Props baik berupa sebuah state atau function
-- [ ] Event Handling (onClick, onChange, onSubmit)
+- [v] Event Handling (onClick, onChange, onSubmit)
 - [v] Conditional Rendering di dalam React
 - [v] Looping List of Data di dalam React
 - [v] Lifecycle component menggunakan useEffect
 - [v] Membuat server (json-server)
-- [ ] Membuat react app untuk client-user (Styling)
+- [v] Membuat react app untuk client-user (Styling)
 - [v] Membuat react app untuk client-admin (CRUD)
 - [v] Menentukan Thema Aplikasi
 - [v] Menentukan Design dan pemilihan CSS Framework
 
 **Report:**
 
-Hari ini saya belajar React Intro. Saya memilih tema Brand Showcase dengan framework Tailwind CSS. 
+Hari ini saya belajar React Intro. Saya memilih tema Brand Showcase dengan framework Tailwind CSS.
 
 ## W1D2
 
