@@ -1,54 +1,53 @@
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
 import TableProducts from "./TableProducts";
+import TableCategories from "./TableCategories";
 import { useEffect, useState } from "react";
 
 export default function Dashboard() {
-  const [categories, setCategories] = useState([])
-  const [products, setProducts] = useState([])
+  const [categories, setCategories] = useState([]);
+  const [products, setProducts] = useState([]);
 
   const fetchCategories = () => {
-    fetch('http://localhost:3000/categories')
-    .then(res => res.json())
-    .then(data => {
-      setCategories(data)
-    })
-  }
+    fetch("http://localhost:3000/categories")
+      .then((res) => res.json())
+      .then((data) => {
+        setCategories(data);
+      });
+  };
 
   const fetchProducts = () => {
-    fetch('http://localhost:3000/products')
-    .then(res => res.json())
-    .then(data => {
-      setProducts(data)
-    })
-  }
-  
+    fetch("http://localhost:3000/products")
+      .then((res) => res.json())
+      .then((data) => {
+        setProducts(data);
+      });
+  };
+
   useEffect(() => {
-    fetchCategories()
-    fetchProducts()
-  }, [])
+    fetchCategories();
+    fetchProducts();
+  }, []);
 
   return (
     <>
       <div className="flex max-w-screen max-h-screen">
-
-          <Sidebar />
+        <Sidebar />
 
         <div className="w-full">
-
           <Navbar />
 
           <div className="mx-20 my-6">
+            <h1 className="font-bold text-2xl mb-4">Products</h1>
 
-          <h1 className="font-bold text-2xl mb-4">Products</h1>
+            <TableProducts products={products} />
 
-          <TableProducts
-            products={products}
-          />
+            <h1 className="font-bold text-2xl mb-4">Categories</h1>
+            
+            <TableCategories categories={categories} />
 
           </div>
         </div>
-
       </div>
     </>
   );
