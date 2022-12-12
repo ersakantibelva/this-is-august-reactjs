@@ -1,5 +1,6 @@
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
+import TableProducts from "./TableProducts";
 import { useEffect, useState } from "react";
 
 export default function Dashboard() {
@@ -29,11 +30,25 @@ export default function Dashboard() {
 
   return (
     <>
-      <div className="flex">
+      <div className="flex max-w-screen max-h-screen">
+
           <Sidebar />
+
         <div className="w-full">
+
           <Navbar />
+
+          <div className="mx-20 my-6">
+
+          <h1 className="font-bold text-2xl mb-4">Products</h1>
+
+          <TableProducts
+            products={products}
+          />
+
+          </div>
         </div>
+
       </div>
     </>
   );

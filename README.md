@@ -1,7 +1,7 @@
 # P3-Challenge-1
 
-- Tema Aplikasi: ...
-- CSS Framework: ...
+- Tema Aplikasi: Brand Showcase
+- CSS Framework: Tailwind CSS
 
 Struktur Folder:
 
@@ -16,11 +16,11 @@ Target:
 - [v] Lecture - React Intro
 - [v] React: Class Component vs Function Component
 - [v] Mempelajari State menggunakan useState
-- [ ] Mengirim Props baik berupa sebuah state atau function
+- [v] Mengirim Props baik berupa sebuah state atau function
 - [ ] Event Handling (onClick, onChange, onSubmit)
 - [ ] Conditional Rendering di dalam React
-- [ ] Looping List of Data di dalam React
-- [ ] Lifecycle component menggunakan useEffect
+- [v] Looping List of Data di dalam React
+- [v] Lifecycle component menggunakan useEffect
 - [v] Membuat server (json-server)
 - [ ] Membuat react app untuk client-user (Styling)
 - [v] Membuat react app untuk client-admin (CRUD)
