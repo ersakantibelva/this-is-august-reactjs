@@ -1,7 +1,8 @@
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
-import TableProducts from "./TableProducts";
-import TableCategories from "./TableCategories";
+import Products from "./Products";
+import Categories from "./Categories";
+import FormProducts from "./FormProducts";
 import { useEffect, useState } from "react";
 
 export default function Dashboard() {
@@ -38,13 +39,11 @@ export default function Dashboard() {
           <Navbar />
 
           <div className="mx-20 my-6">
-            <h1 className="font-bold text-2xl mb-4">Products</h1>
+            {/* <Products products={products} /> */}
 
-            <TableProducts products={products} />
+            {/* <Categories categories={categories} /> */}
 
-            <h1 className="font-bold text-2xl mb-4">Categories</h1>
-            
-            <TableCategories categories={categories} />
+            <FormProducts categories={categories} />
 
           </div>
         </div>
