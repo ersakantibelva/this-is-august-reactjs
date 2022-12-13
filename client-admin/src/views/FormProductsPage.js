@@ -1,4 +1,17 @@
-export default function FormProducts(props) {
+import { useNavigate } from "react-router-dom";
+import useFetch from "../hooks/useFetch";
+
+export default function FormProductsPage() {
+  const navigate = useNavigate()
+  const {
+    fetched: categories,
+    setFetched: setCategories
+  } = useFetch('http://localhost:3000/products')
+
+  const goToProductsPage = () => {
+    navigate('/products')
+  }
+
   return (
     <>
       <h1 className="font-bold text-2xl mb-4 text-center">Add Product</h1>
@@ -41,7 +54,7 @@ export default function FormProducts(props) {
                 Choose Category
               </option>
               {
-                props.categories.map((category, index) => {
+                categories.map((category, index) => {
                   return (
                     <option>{category.name}</option>
                   )
@@ -63,7 +76,7 @@ export default function FormProducts(props) {
 
         <div className="flex gap-2 mt-4">
         <button className="btn btn-info">Submit</button>
-        <button className="btn btn-error">Cancel</button>
+        <button onClick={goToProductsPage} className="btn btn-error">Cancel</button>
         </div>
       </form>
     </>

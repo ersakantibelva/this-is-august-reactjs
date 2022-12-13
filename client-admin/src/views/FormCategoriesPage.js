@@ -1,4 +1,11 @@
-export default function FormCategories() {
+import { useNavigate } from "react-router-dom";
+
+export default function FormCategoriesPage() {
+  const navigate = useNavigate()
+
+  const goToCategoriesPage = () => {
+    navigate('/categories')
+  }
   return (
     <>
       <h1 className="font-bold text-2xl mb-4 text-center">Add Category</h1>
@@ -13,7 +20,7 @@ export default function FormCategories() {
 
         <div className="flex gap-2 mt-4">
           <button className="btn btn-info">Submit</button>
-          <button className="btn btn-error">Cancel</button>
+          <button onClick={goToCategoriesPage} className="btn btn-error">Cancel</button>
         </div>
       </form>
     </>
