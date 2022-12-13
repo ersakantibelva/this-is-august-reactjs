@@ -1,4 +1,4 @@
-export default function FormAdmin() {
+export default function RegisterPage() {
   return (
     <>
       <h1 className="font-bold text-2xl mb-4 text-center">Register Admin</h1>
