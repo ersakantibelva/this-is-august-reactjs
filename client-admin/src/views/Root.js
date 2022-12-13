@@ -5,7 +5,7 @@ import { Outlet } from "react-router-dom";
 export default function Root() {
   return (
     <>
-      <div className="flex w-[1366px] max-h-screen">
+      <div className="flex h-screen max-w-screen">
         <Sidebar />
 
         <div className="w-full">

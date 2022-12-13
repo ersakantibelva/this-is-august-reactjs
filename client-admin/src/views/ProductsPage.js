@@ -16,11 +16,12 @@ export default function ProductsPage() {
   return (
     <>
       <div className="flex justify-between mb-2">
-        <h1 className="font-bold text-2xl mb-4">Products</h1>
+        <h1 className="mb-4 text-2xl font-bold">Products</h1>
         <button onClick={goToAddProducts} className="btn btn-success btn-sm">+ Add Product</button>
       </div>
-
+      <div className="h-full">
       <TableProducts products={products} />
+      </div>
     </>
   );
 }
