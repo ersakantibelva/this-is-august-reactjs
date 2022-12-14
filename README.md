@@ -50,8 +50,8 @@ Hari ini saya belajar custom hooks dan react router. Custom hooks digunakan untu
 
 Target:
 
-- [ ] Lecture - Redux
-- [ ] State vs Global State
+- [v] Lecture - Redux
+- [v] State vs Global State
 - [ ] Bagaimana cara membuat Store
 - [ ] Bagaimana cara membuat Reducer
 - [ ] Bagaimana cara membuat Action

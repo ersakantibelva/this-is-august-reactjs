@@ -19,9 +19,8 @@ export default function ProductsPage() {
         <h1 className="mb-4 text-2xl font-bold">Products</h1>
         <button onClick={goToAddProducts} className="btn btn-success btn-sm">+ Add Product</button>
       </div>
-      <div className="h-full">
+
       <TableProducts products={products} />
-      </div>
     </>
   );
 }
