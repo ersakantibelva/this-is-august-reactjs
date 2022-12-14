@@ -4,6 +4,7 @@ import AddProductsPage from '../views/AddProductsPage'
 import EditProductsPage from '../views/EditProductsPage'
 import CategoriesPage from '../views/CategoriesPage'
 import AddCategoriesPage from '../views/AddCategoriesPage'
+import EditCategoriesPage from '../views/EditCategoriesPage'
 import RegisterPage from '../views/RegisterPage'
 import Root from '../views/Root'
 
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
       {
         path: 'categories/add',
         element: <AddCategoriesPage />
+      },
+      {
+        path: 'categories/edit/:id',
+        element: <EditCategoriesPage />
       },
       {
         path: 'register',

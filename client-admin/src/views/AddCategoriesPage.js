@@ -46,7 +46,7 @@ export default function AddCategoriesPage() {
         />
 
         <div className="flex gap-2 mt-4">
-          <button className="btn btn-info">Submit</button>
+          <button type="submit" className="btn btn-info">Submit</button>
           <button onClick={goToCategoriesPage} className="btn btn-error">Cancel</button>
         </div>
       </form>

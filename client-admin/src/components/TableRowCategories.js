@@ -1,4 +1,12 @@
+import { useNavigate } from "react-router-dom";
+
 export default function TableRowCategories(props) {
+  const navigate = useNavigate()
+
+  function goToEditCategoryForm() {
+    navigate(`/categories/edit/${props.category.id}`)
+  }
+
   return (
     <>
       <tr>
@@ -9,7 +17,7 @@ export default function TableRowCategories(props) {
           <div className="font-bold">{props.category.name}</div>
         </td>
         <th>
-          <button className="btn btn-warning btn-xs mr-2">Edit</button>
+          <button onClick={goToEditCategoryForm} className="mr-2 btn btn-warning btn-xs">Edit</button>
           <button className="btn btn-error btn-xs">Delete</button>
         </th>
       </tr>
