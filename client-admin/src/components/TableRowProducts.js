@@ -41,7 +41,7 @@ export default function TableRowProducts(props) {
           </div>
         </td>
         <td>
-          {props.product.categoryId}
+          {props.product.category.name}
         </td>
         <td>Rp {props.product.price.toLocaleString('id-ID')},00</td>
         <td>{props.product.authorId}</td>

@@ -2,7 +2,7 @@ import { PRODUCT_CHANGEINPUTADD, PRODUCT_GETPRODUCT, PRODUCT_SETPRODUCTS } from 
 
 export const fetchProducts = () => {
   return (dispatch, getState) => {
-    fetch('http://localhost:3000/products')
+    fetch('http://localhost:3000/products?_expand=category')
     .then((res) => {
       if (!res.ok) throw new Error('Error')
       return res.json()
@@ -54,7 +54,7 @@ export const addProduct = (payload) => {
 
 export const editProduct = (id, payload) => {
   return (dispatch, getState) => {
-    fetch(`http://localhost:3000/products/${id}`, {
+    fetch(`http://localhost:3000/products/${id}_expand=category`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'

@@ -21,10 +21,6 @@
     {
       "name": "Outer",
       "id": 3
-    },
-    {
-      "name": "Shoes",
-      "id": 4
     }
   ],
   "products": [
@@ -32,7 +28,7 @@
       "name": "JM Claudine Knit Cut Out Black Top - 182485",
       "description": "Hit refresh on your weekend wardrobe with this Claudine top. Made from soft knit fabric that is comfortable to wear and easy to care for. Simply style it with a pair of denim jeans, culottes or skirt.",
       "price": "200000",
-      "categoryId": "Tops",
+      "categoryId": 1,
       "mainImg": "https://i0.wp.com/thisisapril.com/wp-content/uploads/2022/12/Lookbook-18-1.jpg?fit=1537%2C1920&ssl=1",
       "slug": "JM-Claudine-Knit-Cut-Out-Black-Top-182485",
       "id": 1
@@ -41,7 +37,7 @@
       "name": "Stefan Relaxed Denim Shirt - 182700",
       "description": "Elevate your outfit of the day with this Stefan shirt. Featuring a denim material with short sleeves and a button front design. Pair with the matching bottoms and your go-to accessories for a chic, off-duty vibe.",
       "price": "224000",
-      "categoryId": "Tops",
+      "categoryId": 1,
       "mainImg": "https://i0.wp.com/thisisapril.com/wp-content/uploads/2022/11/Lookbook-95.jpg?fit=1536%2C1920&ssl=1",
       "slug": "Stefan-Relaxed-Denim-Shirt-182700",
       "id": 2
@@ -53,7 +49,7 @@
       "description": "The fashion item that will save you time when dressing up. Simply put these on and style with practically anything and you’re set. Made to be worn everywhere, every day.",
       "price": 231200,
       "mainImg": "https://i0.wp.com/thisisapril.com/wp-content/uploads/2022/11/282809-4-1.jpg?fit=1536%2C1920&ssl=1",
-      "categoryId": "Bottoms"
+      "categoryId": 2
     },
     {
       "id": 4,
@@ -62,14 +58,14 @@
       "description": "Your new go-to skirt for days when you don’t know what to wear. This skirt can be dressed up and down for any occasion. Add blouse and heels for dinner date or tuck in a tee and team with trainers for a casual weekend look.",
       "price": 191200,
       "mainImg": "https://i0.wp.com/thisisapril.com/wp-content/uploads/2022/10/280700-4-scaled.jpg?fit=2048%2C2560&ssl=1",
-      "categoryId": "Bottoms"
+      "categoryId": 2
     },
     {
       "name": "Acelyn V Neck Brown Top - 181952",
       "slug": "Acelyn-V-Neck-Brown-Top-181952",
       "description": "Calm up your busy weekday by wearing something comfortable like our Acelyn Top. Simply designed with V neck to flatter the look, just swap different trousers to get your look refined.",
       "price": "249000",
-      "categoryId": "Tops",
+      "categoryId": 1,
       "mainImg": "https://i0.wp.com/thisisapril.com/wp-content/uploads/2022/08/19-scaled.jpg?fit=2048%2C2560&ssl=1",
       "id": 5
     },
@@ -78,17 +74,17 @@
       "slug": "Akia-High-Waist-Blue-Short-Pants-282209",
       "description": "These Akia shorts are perfect for dressing either up or down. Style them with trainers or boots and matching sweaters for the perfect finish.",
       "price": "229000",
-      "categoryId": "Bottoms",
+      "categoryId": 2,
       "mainImg": "https://i0.wp.com/thisisapril.com/wp-content/uploads/2022/11/282209-1.jpg?fit=3264%2C4080&ssl=1",
       "id": 6
     },
     {
       "name": "Kael Mom Jeans Light Denim Pants - 282805",
-      "slug": "Kael-Mom-Jeans-Light-Denim-Pants-282805",
       "description": "For a timeless aesthetic you can wear anywhere, our Kael jeans are the easiest starting point to pull off a trendy outfit. Pair it with tee and trainers or dress up with a heel and tucked in top. It’s time to meet your perfect denim match.",
       "price": "269000",
-      "categoryId": "Bottoms",
+      "categoryId": "2",
       "mainImg": "https://i0.wp.com/thisisapril.com/wp-content/uploads/2022/11/282805-2-Copy-Copy-scaled.jpg?fit=2048%2C2560&ssl=1",
+      "slug": "Kael-Mom-Jeans-Light-Denim-Pants-282805",
       "id": 7
     }
   ]

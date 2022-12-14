@@ -101,7 +101,7 @@ export default function AddProductsPage() {
               {
                 categories.map((category, index) => {
                   return (
-                    <option key={index} value={category.name}>{category.name}</option>
+                    <option key={index} value={category.id}>{category.name}</option>
                   )
                 })
               }

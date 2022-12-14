@@ -76,3 +76,18 @@ export const editCategory = (id, payload) => {
     })
   }
 }
+
+export const deleteCategory = (id) => {
+  return (dispatch, getState) => {
+    fetch(`http://localhost:3000/categories/${id}`, {
+      method: 'DELETE'
+    })
+    .then((res) => {
+      if(!res.ok) throw new Error('Error')
+      return res.json()
+    })
+    .then((data) => {
+      console.log(data);
+    })
+  }
+}
