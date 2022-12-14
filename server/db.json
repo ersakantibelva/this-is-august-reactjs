@@ -2,11 +2,21 @@
   "users": [
     {
       "id": 1,
-      "email": "admin1@mail.com"
+      "username": "admin1",
+      "email": "admin1@mail.com",
+      "password": "11111",
+      "role": "Admin",
+      "phoneNumber": "08123456789",
+      "Address": "Surabaya"
     },
     {
-      "id": 2,
-      "email": "admin2@mail.com"
+      "username": "admin2",
+      "email": "admin2@mail.com",
+      "password": "22222",
+      "phoneNumber": "08234567891",
+      "Address": "Bandung",
+      "role": "Admin",
+      "id": 2
     }
   ],
   "categories": [
