@@ -3,7 +3,7 @@ import ProductsPage from '../views/ProductsPage'
 import AddProductsPage from '../views/AddProductsPage'
 import EditProductsPage from '../views/EditProductsPage'
 import CategoriesPage from '../views/CategoriesPage'
-import FormCategoriesPage from '../views/FormCategoriesPage'
+import AddCategoriesPage from '../views/AddCategoriesPage'
 import RegisterPage from '../views/RegisterPage'
 import Root from '../views/Root'
 
@@ -37,7 +37,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'categories/add',
-        element: <FormCategoriesPage />
+        element: <AddCategoriesPage />
       },
       {
         path: 'register',

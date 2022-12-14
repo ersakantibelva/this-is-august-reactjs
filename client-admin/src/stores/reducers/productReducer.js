@@ -1,4 +1,4 @@
-import { PRODUCT_CHANGEINPUTADD, PRODUCT_DELETEPRODUCT, PRODUCT_GETPRODUCT, PRODUCT_SETPRODUCTS } from "../actions/product/actionTypes";
+import { PRODUCT_CHANGEINPUTADD, PRODUCT_GETPRODUCT, PRODUCT_SETPRODUCTS } from "../actions/product/actionTypes";
 
 const initialState = {
   products: [],
@@ -31,10 +31,6 @@ export function productReducer(state = initialState, action) {
         }
       }
       break;
-
-    // case PRODUCT_DELETEPRODUCT:
-    //   return {  }
-    //   break;
 
     default:
       return state
