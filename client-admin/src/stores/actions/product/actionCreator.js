@@ -77,3 +77,21 @@ export const changeFormAddProduct = (payload) => {
     payload
   }
 }
+
+export const deleteProduct = (id) => {
+  return (dispatch, getState) => {
+    fetch(`http://localhost:3000/products/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then((res) => {
+      if(!res.ok) throw new Error('Error')
+      return res.json()
+    })
+    .then((data) => {
+      console.log(data);
+    })
+  }
+}

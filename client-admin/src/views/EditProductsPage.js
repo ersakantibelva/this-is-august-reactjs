@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import useFetch from "../hooks/useFetch";
 import { fetchCategories } from "../stores/actions/category/actionCreator";
 import { changeFormAddProduct, fetchProductById } from "../stores/actions/product/actionCreator";
 
