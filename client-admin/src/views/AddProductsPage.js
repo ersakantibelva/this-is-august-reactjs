@@ -13,7 +13,7 @@ export default function AddProductsPage() {
     name: '',
     slug: '',
     description: '',
-    price: 0,
+    price: '',
     categoryId: '',
     mainImg: ''
   })
@@ -45,17 +45,6 @@ export default function AddProductsPage() {
       }
       
       setProductForm(newInput)
-      console.log(newInput);
-  
-      // const response = await fetch('http://localhost:3000/products', {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json'
-      //   },
-      //   body: JSON.stringify(newInput)
-      // })
-      
-      // const data = response.json()
       dispatch(addProduct(newInput))
       
       navigate('/products')

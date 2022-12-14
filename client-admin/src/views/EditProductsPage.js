@@ -1,32 +1,17 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
+import { fetchCategories } from "../stores/actions/category/actionCreator";
+import { changeFormAddProduct, fetchProductById } from "../stores/actions/product/actionCreator";
 
 export default function EditProductsPage() {
+  const { id } = useParams()
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const { product } = useSelector((state) => state.product)
+  const { categories } = useSelector((state) => state.category)
   
-  const [productForm, setProductForm] = useState({
-    name: '',
-    slug: '',
-    description: '',
-    price: 0,
-    categoryId: '',
-    mainImg: ''
-  })
-
-  const {
-    fetched: product,
-    setFetched: setProduct
-  } = useFetch('http://localhost:3000/products')
-  
-  setProduct({
-    ...product
-  })
-  
-  const {
-    fetched: categories
-  } = useFetch('http://localhost:3000/categories')
-
   const goToProductsPage = () => {
     navigate('/products')
   }
@@ -34,26 +19,25 @@ export default function EditProductsPage() {
   function handleChangeFormProduct(e) {
     const { name, value } = e.target
     let newInput = {
-      ...productForm,
+      ...product,
       [name]: value
     }
     
-    setProductForm(newInput)
+    dispatch(changeFormAddProduct(newInput))
   }
 
   async function handleSubmitProductForm(e) {
     try {
       e.preventDefault()
       const newInput = {
-        ...productForm,
-        slug: productForm.name.replaceAll(' ', '-').replace('---', '-')
+        ...product,
+        slug: product.name.replaceAll(' ', '-').replace('---', '-')
       }
       
-      setProductForm(newInput)
-      console.log(newInput);
+      dispatch(changeFormAddProduct(newInput))
   
-      const response = await fetch('http://localhost:3000/products', {
-        method: 'POST',
+      const response = await fetch(`http://localhost:3000/products/${id}`, {
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -67,6 +51,11 @@ export default function EditProductsPage() {
     }
   }
 
+  useEffect( () => {
+    dispatch(fetchCategories())
+    dispatch(fetchProductById(id))
+  }, [])
+
   return (
     <>
       <h1 className="mb-4 text-2xl font-bold text-center">Edit Product</h1>
@@ -76,7 +65,7 @@ export default function EditProductsPage() {
         <input
           onChange={handleChangeFormProduct}
           name="name"
-          value={productForm.name}
+          value={product.name}
           type="text"
           placeholder="Shirt - 18023"
           className="w-full input input-bordered input-sm"
@@ -86,7 +75,7 @@ export default function EditProductsPage() {
         <textarea
           onChange={handleChangeFormProduct}
           name="description"
-          value={productForm.description}
+          value={product.description}
           className="textarea textarea-bordered"
           placeholder="Put the description here"
         ></textarea>
@@ -97,7 +86,7 @@ export default function EditProductsPage() {
             <input
               onChange={handleChangeFormProduct}
               name="price"
-              value={productForm.price}
+              value={product.price}
               type="number"
               placeholder="200000"
               className="w-full input input-bordered input-sm"
@@ -109,7 +98,7 @@ export default function EditProductsPage() {
             <select
               name="categoryId"
               onChange={handleChangeFormProduct}
-              value={productForm.categoryId}
+              value={product.categoryId}
               className="w-full select select-bordered select-sm">
               <option value=''>Select Category</option>
               {
@@ -128,7 +117,7 @@ export default function EditProductsPage() {
         <input
           name="mainImg"
           onChange={handleChangeFormProduct}
-          value={productForm.mainImg}
+          value={product.mainImg}
           type="text"
           placeholder="www.image.com"
           className="w-full input input-bordered input-sm"

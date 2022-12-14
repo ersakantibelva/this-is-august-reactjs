@@ -8,7 +8,6 @@ export const fetchCategories = () => {
       return res.json()
     })
     .then((data) => {
-      console.log('data', data);
       dispatch({
         type: CATEGORY_SETCATEGORIES,
         payload: data
