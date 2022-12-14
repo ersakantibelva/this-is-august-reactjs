@@ -2,11 +2,11 @@ import { useNavigate } from "react-router-dom";
 import TableProducts from "../components/TableProducts";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { fetchProducts } from "../stores/actions/actionCreator";
+import { fetchProducts } from "../stores/actions/product/actionCreator";
 
 export default function ProductsPage() {
   const navigate = useNavigate()
-  const { products } = useSelector((state) => state)
+  const { products } = useSelector((state) => state.product)
   const dispatch = useDispatch()
   
   useEffect(() => {

@@ -1,17 +1,21 @@
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux'
 import TableCategories from "../components/TableCategories";
-import useFetch from "../hooks/useFetch";
+import { useEffect } from "react";
+import { fetchCategories } from "../stores/actions/category/actionCreator";
 
 export default function CategoriesPage() {
   const navigate = useNavigate()
-  const {
-    fetched: categories,
-    setFetched: setCategories
-  } = useFetch('http://localhost:3000/products')
+  const dispatch = useDispatch()
+  const { categories } = useSelector((state) => state.category)
 
   function goToAddCategories() {
     navigate('/categories/add')
   }
+
+  useEffect(() => {
+    dispatch(fetchCategories())
+  }, [])
 
   return (
     <>
