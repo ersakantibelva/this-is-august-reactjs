@@ -1,13 +1,17 @@
 import { useNavigate } from "react-router-dom";
-import useFetch from "../hooks/useFetch";
 import TableProducts from "../components/TableProducts";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { fetchProducts } from "../stores/actions/actionCreator";
 
 export default function ProductsPage() {
   const navigate = useNavigate()
-  const {
-    fetched: products,
-    setFetched: setProducts
-  } = useFetch('http://localhost:3000/products')
+  const { products } = useSelector((state) => state)
+  const dispatch = useDispatch()
+  
+  useEffect(() => {
+    dispatch(fetchProducts())
+  }, [])
 
   function goToAddProducts() {
     navigate('/products/add')
