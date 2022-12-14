@@ -35,16 +35,16 @@ Hari ini saya belajar React Intro. Saya memilih tema Brand Showcase dengan frame
 
 Target:
 
-- [ ] Lecture - Custom Hooks
-- [ ] Rules of Hooks
-- [ ] Lecture - React-Router
+- [v] Lecture - Custom Hooks
+- [v] Rules of Hooks
+- [v] Lecture - React-Router
 - [ ] Membuat router user-side (min: home, detail)
-- [ ] Membuat router admin-side (min: login, add admin, CRUD main entitas, CRUD another entitas)
-- [ ] Membuat privateRoute untuk admin
+- [v] Membuat router admin-side (min: login, add admin, CRUD main entitas, CRUD another entitas)
+- [v] Membuat privateRoute untuk admin
 
 **Report:**
 
-...
+Hari ini saya belajar custom hooks dan react router. Custom hooks digunakan untuk logic fetching data, sedangkan react router diaplikasikan untuk route-route seperti page login, products, categories, register admin, add product, edit product, add category, dan edit category.
 
 ## W1D3
 

@@ -1,4 +1,11 @@
+import { useNavigate } from "react-router-dom";
+
 export default function TableRowProducts(props) {
+  const navigate = useNavigate()
+  function goToEditProduct() {
+    navigate(`/products/edit/${props.product.id}`)
+  }
+
   return (
     <>
       <tr>
@@ -10,7 +17,7 @@ export default function TableRowProducts(props) {
         <td className="">
           <div className="flex items-center space-x-3">
             <div className="avatar">
-              <div className="mask mask-squircle w-12 h-12">
+              <div className="w-12 h-12 mask mask-squircle">
                 <img
                   src={props.product.mainImg}
                   alt="Product"
@@ -20,7 +27,7 @@ export default function TableRowProducts(props) {
             <div>
               <div className="font-bold">{props.product.name}</div>
               <div className="text-sm font-medium whitespace-pre-wrap">{props.product.slug}</div>
-              <div className="text-sm opacity-50 whitespace-pre-wrap">{props.product.description}</div>
+              <div className="text-sm whitespace-pre-wrap opacity-50">{props.product.description}</div>
             </div>
           </div>
         </td>
@@ -34,7 +41,7 @@ export default function TableRowProducts(props) {
         </td>
         <th>
           <div className="flex flex-col gap-2">
-          <button className="btn btn-warning btn-xs mr-2">Edit</button>
+          <button onClick={goToEditProduct} className="mr-2 btn btn-warning btn-xs">Edit</button>
           <button className="btn btn-error btn-xs">Delete</button>
 
           </div>

@@ -5,7 +5,7 @@ export default function TableProducts(props) {
     <>
     
       <div className="overflow-x-auto overflow-y-auto">
-        <table className="table w-[1366px]">
+        <table className="table">
           <thead>
             <tr>
               <th>No</th>

@@ -1,10 +1,11 @@
-import Dashboard from "./components/Dashboard";
+import { RouterProvider } from "react-router-dom";
+import router from "./router";
 
 function App() {
   return (
     <>
     <div className="max-w-screen" >
-    <Dashboard />
+      <RouterProvider router={router} />
     </div>
     </>
   );
