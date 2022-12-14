@@ -1,6 +1,7 @@
 import { createBrowserRouter, redirect } from 'react-router-dom'
 import ProductsPage from '../views/ProductsPage'
-import FormProductsPage from '../views/FormProductsPage'
+import AddProductsPage from '../views/AddProductsPage'
+import EditProductsPage from '../views/EditProductsPage'
 import CategoriesPage from '../views/CategoriesPage'
 import FormCategoriesPage from '../views/FormCategoriesPage'
 import RegisterPage from '../views/RegisterPage'
@@ -24,7 +25,11 @@ const router = createBrowserRouter([
       },
       {
         path: 'products/add',
-        element: <FormProductsPage />
+        element: <AddProductsPage />
+      },
+      {
+        path: 'products/edit/:id',
+        element: <EditProductsPage />
       },
       {
         path: 'categories',

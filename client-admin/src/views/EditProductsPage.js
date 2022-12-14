@@ -1,9 +1,10 @@
 import { useState } from "react";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 
-export default function FormProductsPage() {
+export default function EditProductsPage() {
   const navigate = useNavigate()
+  
   const [productForm, setProductForm] = useState({
     name: '',
     slug: '',
@@ -11,6 +12,15 @@ export default function FormProductsPage() {
     price: 0,
     categoryId: '',
     mainImg: ''
+  })
+
+  const {
+    fetched: product,
+    setFetched: setProduct
+  } = useFetch('http://localhost:3000/products')
+  
+  setProduct({
+    ...product
   })
   
   const {
@@ -59,7 +69,7 @@ export default function FormProductsPage() {
 
   return (
     <>
-      <h1 className="mb-4 text-2xl font-bold text-center">Add Product</h1>
+      <h1 className="mb-4 text-2xl font-bold text-center">Edit Product</h1>
 
       <form onSubmit={handleSubmitProductForm} className="flex flex-col w-full">
         <label className="mt-3 mb-1 font-medium">Name</label>
