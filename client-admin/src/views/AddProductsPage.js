@@ -1,9 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import useFetch from "../hooks/useFetch";
+import { useSelector, useDispatch } from 'react-redux'
+import { fetchCategories } from '../stores/actions/category/actionCreator'
+import { addProduct } from "../stores/actions/product/actionCreator";
 
 export default function AddProductsPage() {
   const navigate = useNavigate()
+  const { categories } = useSelector((state) => state.category)
+  const dispatch = useDispatch()
   
   const [productForm, setProductForm] = useState({
     name: '',
@@ -13,10 +17,6 @@ export default function AddProductsPage() {
     categoryId: '',
     mainImg: ''
   })
-  
-  const {
-    fetched: categories
-  } = useFetch('http://localhost:3000/categories')
 
   const goToProductsPage = () => {
     navigate('/products')
@@ -32,6 +32,10 @@ export default function AddProductsPage() {
     setProductForm(newInput)
   }
 
+  useEffect(() => {
+    dispatch(fetchCategories())
+  }, [])
+
   async function handleSubmitProductForm(e) {
     try {
       e.preventDefault()
@@ -43,15 +47,17 @@ export default function AddProductsPage() {
       setProductForm(newInput)
       console.log(newInput);
   
-      const response = await fetch('http://localhost:3000/products', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(newInput)
-      })
+      // const response = await fetch('http://localhost:3000/products', {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json'
+      //   },
+      //   body: JSON.stringify(newInput)
+      // })
       
-      const data = response.json()
+      // const data = response.json()
+      dispatch(addProduct(newInput))
+      
       navigate('/products')
     } catch (error) {
       console.log(error)
