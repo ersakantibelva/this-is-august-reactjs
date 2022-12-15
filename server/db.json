@@ -17,6 +17,15 @@
       "Address": "Bandung",
       "role": "Admin",
       "id": 2
+    },
+    {
+      "username": "admin3",
+      "email": "admin3@mail.com",
+      "password": "33333",
+      "phoneNumber": "0812246689",
+      "Address": "Jakarta",
+      "role": "Admin",
+      "id": 3
     }
   ],
   "categories": [
@@ -37,7 +46,7 @@
     {
       "name": "JM Claudine Knit Cut Out Black Top - 182485",
       "description": "Hit refresh on your weekend wardrobe with this Claudine top. Made from soft knit fabric that is comfortable to wear and easy to care for. Simply style it with a pair of denim jeans, culottes or skirt.",
-      "price": "200000",
+      "price": "300000",
       "categoryId": 1,
       "mainImg": "https://i0.wp.com/thisisapril.com/wp-content/uploads/2022/12/Lookbook-18-1.jpg?fit=1537%2C1920&ssl=1",
       "slug": "JM-Claudine-Knit-Cut-Out-Black-Top-182485",
