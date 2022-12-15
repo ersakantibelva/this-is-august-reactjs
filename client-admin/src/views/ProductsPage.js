@@ -1,13 +1,17 @@
 import { useNavigate } from "react-router-dom";
-import useFetch from "../hooks/useFetch";
 import TableProducts from "../components/TableProducts";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { fetchProducts } from "../stores/actions/product/actionCreator";
 
 export default function ProductsPage() {
   const navigate = useNavigate()
-  const {
-    fetched: products,
-    setFetched: setProducts
-  } = useFetch('http://localhost:3000/products')
+  const { products } = useSelector((state) => state.product)
+  const dispatch = useDispatch()
+  
+  useEffect(() => {
+    dispatch(fetchProducts())
+  }, [])
 
   function goToAddProducts() {
     navigate('/products/add')
@@ -19,9 +23,8 @@ export default function ProductsPage() {
         <h1 className="mb-4 text-2xl font-bold">Products</h1>
         <button onClick={goToAddProducts} className="btn btn-success btn-sm">+ Add Product</button>
       </div>
-      <div className="h-full">
+
       <TableProducts products={products} />
-      </div>
     </>
   );
 }

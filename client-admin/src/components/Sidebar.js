@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 export default function Sidebar() {
   return (
     <>
-      <div className="flex h-screen flex-col justify-between border-r bg-white min-w-min">
+      <div className="fixed flex h-screen flex-col justify-between border-r bg-white min-w-min">
         <div className="px-4 py-6">
           <span className="block h-10 w-32 rounded-lg bg-gray-200" />
           <nav aria-label="Main Nav" className="mt-6 flex flex-col space-y-1">

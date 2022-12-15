@@ -3,9 +3,11 @@ import ProductsPage from '../views/ProductsPage'
 import AddProductsPage from '../views/AddProductsPage'
 import EditProductsPage from '../views/EditProductsPage'
 import CategoriesPage from '../views/CategoriesPage'
-import FormCategoriesPage from '../views/FormCategoriesPage'
+import AddCategoriesPage from '../views/AddCategoriesPage'
+import EditCategoriesPage from '../views/EditCategoriesPage'
 import RegisterPage from '../views/RegisterPage'
 import Root from '../views/Root'
+import LoginPage from '../views/LoginPage'
 
 const router = createBrowserRouter([
   {
@@ -37,7 +39,11 @@ const router = createBrowserRouter([
       },
       {
         path: 'categories/add',
-        element: <FormCategoriesPage />
+        element: <AddCategoriesPage />
+      },
+      {
+        path: 'categories/edit/:id',
+        element: <EditCategoriesPage />
       },
       {
         path: 'register',
@@ -47,7 +53,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/login',
-    element: <h1>ini login</h1>,
+    element: <LoginPage />,
     loader: () => {
       const token = localStorage.getItem("access_token")
       if(token) {

@@ -4,8 +4,8 @@ export default function TableProducts(props) {
   return (
     <>
     
-      <div className="overflow-x-auto overflow-y-auto">
-        <table className="table">
+      <div className="overflow-x-auto overflow-y-auto shadow-md">
+        <table className="table h-full">
           <thead>
             <tr>
               <th>No</th>

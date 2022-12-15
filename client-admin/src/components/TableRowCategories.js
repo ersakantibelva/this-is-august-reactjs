@@ -1,4 +1,21 @@
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { deleteCategory, fetchCategories } from "../stores/actions/category/actionCreator";
+
 export default function TableRowCategories(props) {
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  function goToEditCategoryForm() {
+    navigate(`/categories/edit/${props.category.id}`)
+  }
+
+  function handleDeleteCategory() {
+    dispatch(deleteCategory(props.category.id))
+    dispatch(fetchCategories())
+    navigate('/categories')
+  }
+
   return (
     <>
       <tr>
@@ -9,8 +26,8 @@ export default function TableRowCategories(props) {
           <div className="font-bold">{props.category.name}</div>
         </td>
         <th>
-          <button className="btn btn-warning btn-xs mr-2">Edit</button>
-          <button className="btn btn-error btn-xs">Delete</button>
+          <button onClick={goToEditCategoryForm} className="mr-2 btn btn-warning btn-xs">Edit</button>
+          <button onClick={handleDeleteCategory} className="btn btn-error btn-xs">Delete</button>
         </th>
       </tr>
     </>

@@ -1,9 +1,18 @@
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from 'react-redux'
+import { deleteProduct, fetchProducts } from "../stores/actions/product/actionCreator";
 
 export default function TableRowProducts(props) {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+
   function goToEditProduct() {
     navigate(`/products/edit/${props.product.id}`)
+  }
+
+  function handleDeleteProduct() {
+    dispatch(deleteProduct(props.product.id))
+    dispatch(fetchProducts())
   }
 
   return (
@@ -32,7 +41,7 @@ export default function TableRowProducts(props) {
           </div>
         </td>
         <td>
-          {props.product.categoryId}
+          {props.product.category.name}
         </td>
         <td>Rp {props.product.price.toLocaleString('id-ID')},00</td>
         <td>{props.product.authorId}</td>
@@ -42,7 +51,7 @@ export default function TableRowProducts(props) {
         <th>
           <div className="flex flex-col gap-2">
           <button onClick={goToEditProduct} className="mr-2 btn btn-warning btn-xs">Edit</button>
-          <button className="btn btn-error btn-xs">Delete</button>
+          <button onClick={handleDeleteProduct} className="btn btn-error btn-xs">Delete</button>
 
           </div>
           

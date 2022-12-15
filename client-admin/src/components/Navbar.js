@@ -1,7 +1,7 @@
 export default function Navbar() {
   return (
     <>
-      <header aria-label="Site Header" className="border-b border-gray-100">
+      <header aria-label="Site Header" className="fixedborder-b border-gray-100">
         <div className="mx-auto flex h-16 items-center justify-between">
           <div className="flex flex-1 items-center justify-end">
             <div className="flex items-center">
