@@ -1,11 +1,21 @@
 const errorHandler = (err, req, res, next) => {
   let code = 500
   let message = 'Internal server error'
+
+  const badReq = [
+    "Email is required",
+    "Password is required",
+    "Description is required",
+    "Price is required",
+    "Main image URL is required"
+  ]
+
+  const notAuth = ["Invalid token", "Invalid email/password"]
   console.log(err);
-  if(err.message == "Email is required" || err.message == "Password is required" ) {
+  if(badReq.includes(err.message)) {
     code = 400
     message = err.message
-  } else if( ["Invalid token", "Invalid email/password"].includes(err.message) ) {
+  } else if( notAuth.includes(err.message) ) {
     code = 401
     message = err.message
   } else if(['SequelizeValidationError', "SequelizeUniqueConstraintError"].includes(err.name)) {

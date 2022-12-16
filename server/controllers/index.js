@@ -81,6 +81,58 @@ class Controller {
     }
   }
 
+  static async addProduct(req, res, next) {
+    const t = await sequelize.transaction()
+
+    try {
+      const { name, description, price, mainImg, categoryId, images } = req.body
+      if(!name) throw { message: "Name is required" }
+      if(!description) throw { message: "Description is required" }
+      if(!price) throw { message: "Price is required" }
+      if(!mainImg) throw { message: "Main image URL is required" }
+
+      const slug = name.toLowerCase().replaceAll(" ", "-").replace("---", "-")
+
+      console.log({
+        name,
+        slug,
+        description,
+        price,
+        mainImg,
+        categoryId,
+        images
+      });
+      
+      const product = await Product.create({
+        name,
+        slug,
+        description,
+        price,
+        mainImg,
+        categoryId,
+        authorId: req.user.id
+      }, {
+        transaction: t
+      })
+
+      images.map(el => {
+        el.productId = product.id
+        return el
+      })
+
+      const image = await Image.bulkCreate(images, {
+        validate: true,
+        transaction: t
+      })
+
+      t.commit()
+      res.status(200).json({ message: `Product ${name} has been added with id ${product.id}` })
+    } catch (error) {
+      t.rollback()
+      next(error)
+    }
+  }
+
   // static async showProducts(req, res, next) {
   //   try {
       

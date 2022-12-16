@@ -12,6 +12,10 @@ const authentication = async (req, res, next) => {
     if(!user) throw { message: "Invalid token" }
     if(user.role != "Admin") throw { message: "Invalid token" }
 
+    req.user = {
+      id: user.id
+    }
+
     next()
   } catch (error) {
     next(error)
