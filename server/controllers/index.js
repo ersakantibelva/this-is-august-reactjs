@@ -92,16 +92,6 @@ class Controller {
       if(!mainImg) throw { message: "Main image URL is required" }
 
       const slug = name.toLowerCase().replaceAll(" ", "-").replace("---", "-")
-
-      console.log({
-        name,
-        slug,
-        description,
-        price,
-        mainImg,
-        categoryId,
-        images
-      });
       
       const product = await Product.create({
         name,
@@ -143,6 +133,78 @@ class Controller {
       
       res.status(200).json(product)
     } catch (error) {
+      next(error)
+    }
+  }
+
+  static async editProduct(req, res, next) {
+    const t = await sequelize.transaction()
+
+    try {
+      const { productId } = req.params
+      const { name, description, price, mainImg, categoryId, images } = req.body
+      if(!name) throw { message: "Name is required" }
+      if(!description) throw { message: "Description is required" }
+      if(!price) throw { message: "Price is required" }
+      if(!mainImg) throw { message: "Main image URL is required" }
+
+      const slug = name.toLowerCase().replaceAll(" ", "-").replace("---", "-")
+      
+      const product = await Product.update({
+        name,
+        slug,
+        description,
+        price,
+        mainImg,
+        categoryId
+      }, {
+        where: { id: productId },
+        transaction: t
+      })
+
+      images.map(el => {
+        el.productId = productId
+        return el
+      })
+
+      await Image.bulkCreate(images, {
+        updateOnDuplicate: ["imgUrl"],
+        transaction: t
+      })
+
+      const imagesDb = await Image.findAll({
+        where: {
+          productId
+        },
+        attributes: ["imgUrl"],
+        transaction: t
+      })
+
+      const imgUrlDb = imagesDb.map(el => {
+        return el.get("imgUrl")
+      })
+
+      const imgUrlReq = images.map(el => {
+        return el.imgUrl
+      })
+
+      const deleteImg = imgUrlDb.filter(el => !imgUrlReq.includes(el))
+
+      if(deleteImg.length) {
+        await Image.destroy({
+          where: {
+            imgUrl: {
+              [Op.in]: deleteImg
+            }
+          },
+          transaction: t
+        })
+      }
+
+      t.commit()
+      res.status(200).json("ok")
+    } catch (error) {
+      t.rollback()
       next(error)
     }
   }
