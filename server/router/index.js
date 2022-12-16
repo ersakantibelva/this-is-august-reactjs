@@ -1,9 +1,9 @@
 const Controller = require('../controllers')
 const router = require('express').Router()
 
-router.get('/login', Controller.showTask)
+router.post('/login', Controller.login)
 
-router.get('/register', Controller.showTask)
+router.post('/register', Controller.showTask)
 
 router.get('/products', Controller.showTask)
 router.post('/products', Controller.showTask)
