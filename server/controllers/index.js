@@ -62,7 +62,7 @@ class Controller {
 
       const options = {
         order: [["id", "ASC"]],
-        include: [ User, Category ]
+        include: [ User, Category, Image ]
       }
 
       if(search) {
@@ -129,6 +129,20 @@ class Controller {
       res.status(200).json({ message: `Product ${name} has been added with id ${product.id}` })
     } catch (error) {
       t.rollback()
+      next(error)
+    }
+  }
+
+  static async showProduct(req, res, next) {
+    try {
+      const { productId } = req.params
+
+      const product = await Product.findByPk(productId, {
+        include: [ User, Category, Image ]
+      })
+      
+      res.status(200).json(product)
+    } catch (error) {
       next(error)
     }
   }

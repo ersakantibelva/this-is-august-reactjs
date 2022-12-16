@@ -11,7 +11,7 @@ router.post('/register', Controller.register)
 
 router.get('/products', Controller.showProducts)
 router.post('/products', Controller.addProduct)
-router.get('/products/:productId', Controller.showTask)
+router.get('/products/:productId', Controller.showProduct)
 router.put('/products/:productId', Controller.showTask)
 router.delete('/products/:productId', Controller.showTask)
 
