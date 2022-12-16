@@ -9,7 +9,7 @@ router.use(authentication)
 
 router.post('/register', Controller.register)
 
-router.get('/products', Controller.showTask)
+router.get('/products', Controller.showProducts)
 router.post('/products', Controller.showTask)
 router.get('/products/:productId', Controller.showTask)
 router.put('/products/:productId', Controller.showTask)

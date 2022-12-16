@@ -1,6 +1,7 @@
 const { User, Category, Product, Image, sequelize } = require('../models')
 const { compareHash, hashPass } = require('../helpers/bcrypt')
 const { createToken } = require('../helpers/jwt')
+const { Op } = require('sequelize')
 
 class Controller {
   static async login(req, res, next) {
@@ -54,6 +55,40 @@ class Controller {
       next(error)
     }
   }
+
+  static async showProducts(req, res, next) {
+    try {
+      const { search } = req.query
+
+      const options = {
+        order: [["id", "ASC"]],
+        include: [ User, Category ]
+      }
+
+      if(search) {
+        options.where = {
+          name: {
+            [Op.iLike]: `%${search}%`
+          }
+        }
+      }
+
+      const products = await Product.findAll(options)
+
+      res.status(200).json(products)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  // static async showProducts(req, res, next) {
+  //   try {
+      
+  //     res.status(200).json("ok")
+  //   } catch (error) {
+  //     next(error)
+  //   }
+  // }
 
   static showTask(req, res, next) {
     res.send('Hello World!')
