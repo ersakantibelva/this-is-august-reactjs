@@ -3,7 +3,7 @@ const router = require('express').Router()
 
 router.post('/login', Controller.login)
 
-router.post('/register', Controller.showTask)
+router.post('/register', Controller.register)
 
 router.get('/products', Controller.showTask)
 router.post('/products', Controller.showTask)
