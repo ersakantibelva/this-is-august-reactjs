@@ -5,12 +5,15 @@ const errorHandler = (err, req, res, next) => {
   if(err.message == "Email is required" || err.message == "Password is required" ) {
     code = 400
     message = err.message
-  } else if(err.message == "Invalid email/password") {
+  } else if( ["Invalid token", "Invalid email/password"].includes(err.message) ) {
     code = 401
     message = err.message
-  } else if(err.name == 'SequelizeValidationError') {
+  } else if(['SequelizeValidationError', "SequelizeUniqueConstraintError"].includes(err.name)) {
     code = 400
     message = err.errors[0].message
+  } else if (err.name == "JsonWebTokenError") {
+    code = 401
+    message = "Invalid token"
   }
 
   res.status(code).json({ message })

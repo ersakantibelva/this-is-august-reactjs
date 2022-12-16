@@ -1,7 +1,11 @@
 const Controller = require('../controllers')
+const authentication = require('../middlewares/authentication')
 const router = require('express').Router()
 
 router.post('/login', Controller.login)
+router.get('/pub/products', Controller.showTask)
+
+router.use(authentication)
 
 router.post('/register', Controller.register)
 
@@ -17,6 +21,5 @@ router.get('/categories/:categoryId', Controller.showTask)
 router.put('/categories/:categoryId', Controller.showTask)
 router.delete('/categories/:categoryId', Controller.showTask)
 
-router.get('/pub/products', Controller.showTask)
 
 module.exports = router
