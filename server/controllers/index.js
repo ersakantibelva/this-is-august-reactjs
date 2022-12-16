@@ -148,9 +148,12 @@ class Controller {
       if(!price) throw { message: "Price is required" }
       if(!mainImg) throw { message: "Main image URL is required" }
 
+      let product = await Product.findByPk(productId)
+      if(!product) throw { message: 'Data is not found' }
+
       const slug = name.toLowerCase().replaceAll(" ", "-").replace("---", "-")
       
-      const product = await Product.update({
+      product = await Product.update({
         name,
         slug,
         description,
@@ -202,9 +205,43 @@ class Controller {
       }
 
       t.commit()
-      res.status(200).json("ok")
+      res.status(200).json({ message: `Product ${product.name} has been updated` })
     } catch (error) {
       t.rollback()
+      next(error)
+    }
+  }
+
+  static async deleteProduct(req, res, next) {
+    const t = await sequelize.transaction()
+    
+    try {
+      const { productId } = req.params
+      
+      const product = await Product.findByPk(productId)
+      if(!product) throw { message: 'Data is not found' }
+
+      await Product.destroy({
+        where: {
+          id: productId
+        },
+        transaction: t
+      })
+
+      t.commit()
+      res.status(200).json({ message: `Product ${product.name} has been deleted` })
+    } catch (error) {
+      t.rollback()
+      next(error)
+    }
+  }
+
+  static async showCategories(req, res, next) {
+    try {
+      const categories = await Category.findAll()
+      
+      res.status(200).json(categories)
+    } catch (error) {
       next(error)
     }
   }

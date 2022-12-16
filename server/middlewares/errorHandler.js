@@ -24,6 +24,9 @@ const errorHandler = (err, req, res, next) => {
   } else if (err.name == "JsonWebTokenError") {
     code = 401
     message = "Invalid token"
+  } else if (err.message == 'Data is not found') {
+    code = 404
+    message = err.message
   }
 
   res.status(code).json({ message })
