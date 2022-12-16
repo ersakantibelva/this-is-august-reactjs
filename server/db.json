@@ -7,25 +7,7 @@
       "password": "11111",
       "role": "Admin",
       "phoneNumber": "08123456789",
-      "Address": "Surabaya"
-    },
-    {
-      "username": "admin2",
-      "email": "admin2@mail.com",
-      "password": "22222",
-      "phoneNumber": "08234567891",
-      "Address": "Bandung",
-      "role": "Admin",
-      "id": 2
-    },
-    {
-      "username": "admin3",
-      "email": "admin3@mail.com",
-      "password": "33333",
-      "phoneNumber": "0812246689",
-      "Address": "Jakarta",
-      "role": "Admin",
-      "id": 3
+      "address": "Surabaya"
     }
   ],
   "categories": [
@@ -105,6 +87,93 @@
       "mainImg": "https://i0.wp.com/thisisapril.com/wp-content/uploads/2022/11/282805-2-Copy-Copy-scaled.jpg?fit=2048%2C2560&ssl=1",
       "slug": "Kael-Mom-Jeans-Light-Denim-Pants-282805",
       "id": 7
+    }
+  ],
+  "images": [
+    {
+      "id": 1,
+      "productId": 1,
+      "imgUrl": "https://i0.wp.com/thisisapril.com/wp-content/uploads/2022/12/Lookbook-39-2.jpg?fit=1536%2C1920&ssl=1"
+    },
+    {
+      "id": 2,
+      "productId": 1,
+      "imgUrl": "https://i0.wp.com/thisisapril.com/wp-content/uploads/2022/12/182485-1.jpg?fit=3264%2C4080&ssl=1"
+    },
+    {
+      "id": 3,
+      "productId": 1,
+      "imgUrl": "https://i0.wp.com/thisisapril.com/wp-content/uploads/2022/12/182485-3.jpg?fit=3264%2C4080&ssl=1"
+    },
+    {
+      "id": 4,
+      "productId": 2,
+      "imgUrl": "https://i0.wp.com/thisisapril.com/wp-content/uploads/2022/11/182700-4.jpg?fit=1536%2C1920&ssl=1"
+    },
+    {
+      "id": 5,
+      "productId": 2,
+      "imgUrl": "https://i0.wp.com/thisisapril.com/wp-content/uploads/2022/11/182700-2.jpg?fit=1536%2C1920&ssl=1"
+    },
+    {
+      "id": 6,
+      "productId": 3,
+      "imgUrl": "https://i0.wp.com/thisisapril.com/wp-content/uploads/2022/11/282809-2.jpg?fit=1536%2C1920&ssl=1"
+    },
+    {
+      "id": 7,
+      "productId": 3,
+      "imgUrl": "https://i0.wp.com/thisisapril.com/wp-content/uploads/2022/11/282809-3.jpg?fit=1536%2C1920&ssl=1"
+    },
+    {
+      "id": 8,
+      "productId": 4,
+      "imgUrl": "https://i0.wp.com/thisisapril.com/wp-content/uploads/2022/10/280700-3-scaled.jpg?fit=2048%2C2560&ssl=1"
+    },
+    {
+      "id": 9,
+      "productId": 4,
+      "imgUrl": "https://i0.wp.com/thisisapril.com/wp-content/uploads/2022/10/280700-4-scaled.jpg?fit=2048%2C2560&ssl=1"
+    },
+    {
+      "id": 10,
+      "productId": 4,
+      "imgUrl": "https://i0.wp.com/thisisapril.com/wp-content/uploads/2022/10/280700-1-1-scaled.jpg?fit=2048%2C2560&ssl=1"
+    },
+    {
+      "id": 11,
+      "productId": 5,
+      "imgUrl": "https://i0.wp.com/thisisapril.com/wp-content/uploads/2022/08/Lookbook-33-4-scaled.jpg?fit=2048%2C2560&ssl=1"
+    },
+    {
+      "id": 12,
+      "productId": 5,
+      "imgUrl": "https://i0.wp.com/thisisapril.com/wp-content/uploads/2022/08/181952-1-scaled.jpg?fit=2048%2C2560&ssl=1"
+    },
+    {
+      "id": 13,
+      "productId": 5,
+      "imgUrl": "https://i0.wp.com/thisisapril.com/wp-content/uploads/2022/08/181952-4.jpg?fit=1388%2C1736&ssl=1"
+    },
+    {
+      "id": 14,
+      "productId": 6,
+      "imgUrl": "https://i0.wp.com/thisisapril.com/wp-content/uploads/2022/11/282209-4.jpg?fit=3264%2C4080&ssl=1"
+    },
+    {
+      "id": 15,
+      "productId": 6,
+      "imgUrl": "https://i0.wp.com/thisisapril.com/wp-content/uploads/2022/11/282209-3.jpg?fit=3264%2C4080&ssl=1"
+    },
+    {
+      "id": 16,
+      "productId": 7,
+      "imgUrl": "https://i0.wp.com/thisisapril.com/wp-content/uploads/2022/11/282805-3-Copy-Copy-scaled.jpg?fit=2048%2C2560&ssl=1"
+    },
+    {
+      "id": 17,
+      "productId": 7,
+      "imgUrl": "https://i0.wp.com/thisisapril.com/wp-content/uploads/2022/11/282805-4-Copy-scaled.jpg?fit=2048%2C2560&ssl=1"
     }
   ]
 }
