@@ -26,6 +26,91 @@ class Controller {
     }
   }
 
+  static async showProductsPub(req, res, next) {
+    try {
+      const { page, search } = req.query
+      const options = {
+        limit: 9
+      }
+
+      if(search) {
+        options.where = {
+          name: {
+            [Op.iLike]: `%${search}%`
+          }
+        }
+      }
+
+      if(page) {
+        options.offset = options.limit * (page - 1)
+      }
+
+      const { count, rows } = await Product.findAndCountAll(options)
+
+
+      res.status(200).json({
+        totalProduct: count,
+        totalPages: Math.ceil(count / options.limit),
+        currentPage: page ? Number(page) : 1,
+        products: rows
+      })
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  static async showProductByIdPub(req, res, next) {
+    try {
+      const { productId } = req.params
+
+      const product = await Product.findByPk(productId, {
+        include: [Category, Image]
+      })
+      if(!product) throw { message: 'Data is not found' }
+      
+      res.status(200).json(product)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  static async showProductByCategoryPub(req, res, next) {
+    try {
+      const { categoryId } = req.params
+      const { page, search } = req.query
+      const options = {
+        limit: 9,
+        where: {
+          categoryId
+        }
+      }
+
+      if(search) {
+        options.where = {
+          name: {
+            [Op.iLike]: `%${search}%`
+          }
+        }
+      }
+
+      if(page) {
+        options.offset = options.limit * (page - 1)
+      }
+
+      const { count, rows } = await Product.findAndCountAll(options)
+
+
+      res.status(200).json({
+        totalProduct: count,
+        totalPages: Math.ceil(count / options.limit),
+        currentPage: page ? Number(page) : 1,
+        products: rows
+      })
+    } catch (error) {
+      next(error)
+    }
+  }
+
   static async register(req, res, next) {
     const t = await sequelize.transaction()
 
@@ -116,7 +201,7 @@ class Controller {
       })
 
       t.commit()
-      res.status(200).json({ message: `Product ${name} has been added with id ${product.id}` })
+      res.status(201).json({ message: `Product ${name} has been added with id ${product.id}` })
     } catch (error) {
       t.rollback()
       next(error)
@@ -246,17 +331,52 @@ class Controller {
     }
   }
 
-  // static async showProducts(req, res, next) {
-  //   try {
-      
-  //     res.status(200).json("ok")
-  //   } catch (error) {
-  //     next(error)
-  //   }
-  // }
+  static async addCategory(req, res, next) {
+    try {
+      const { name } = req.body
+      if(!name) throw { message: 'Name is required' }
 
-  static showTask(req, res, next) {
-    res.send('Hello World!')
+      const category = await Category.create({ name })
+      
+      res.status(201).json({ message: `Category ${category.name} has been added` })
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  static async editCategory(req, res, next) {
+    try {
+      const { categoryId } = req.params
+      const { name } = req.body
+
+      const category = await Category.findByPk(categoryId)
+      if(!category) throw { message: 'Data is not found' }
+
+      await Category.update({ name }, {
+        where: { id: categoryId }
+      })
+      
+      res.status(200).json({ message: `Category ${name} has been updated` })
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  static async deleteCategory(req, res, next) {
+    try {
+      const { categoryId } = req.params
+
+      const category = await Category.findByPk(categoryId)
+      if(!category) throw { message: 'Data is not found' }
+
+      await Category.destroy({
+        where: { id: categoryId }
+      })
+      
+      res.status(200).json({ message: `Category ${category.name} has been deleted` })
+    } catch (error) {
+      next(error)
+    }
   }
 }
 
