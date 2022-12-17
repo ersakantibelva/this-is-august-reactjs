@@ -28,7 +28,7 @@ export function productReducer(state = initialState, action) {
           description: action.payload.description,
           price: action.payload.price,
           categoryId: action.payload.categoryId,
-          mainImg: action.payload.mainImg
+          mainImg: action.payload.mainImg,
         },
         Images: action.payload.Images
       }
