@@ -55,13 +55,13 @@ export default function TableRowProducts(props) {
           <div className="flex flex-col gap-2">
             <button
               onClick={goToEditProduct}
-              className="mr-2 btn btn-warning btn-xs"
+              className="mr-2 btn btn-warning btn-xs w-full"
             >
               Edit
             </button>
             <button
               onClick={handleDeleteProduct}
-              className="btn btn-error btn-xs"
+              className="btn btn-error btn-xs w-full"
             >
               Delete
             </button>

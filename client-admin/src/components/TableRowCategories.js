@@ -12,8 +12,12 @@ export default function TableRowCategories(props) {
 
   function handleDeleteCategory() {
     dispatch(deleteCategory(props.category.id))
-    dispatch(fetchCategories())
-    navigate('/categories')
+    .then(() => {
+      return dispatch(fetchCategories())
+    })
+    .then(() => {
+      navigate('/categories')
+    })
   }
 
   return (
