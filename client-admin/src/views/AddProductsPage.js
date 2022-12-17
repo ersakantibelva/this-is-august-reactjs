@@ -1,55 +1,66 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from 'react-redux'
-import { fetchCategories } from '../stores/actions/category/actionCreator'
+import { useSelector, useDispatch } from "react-redux";
+import { fetchCategories } from "../stores/actions/category/actionCreator";
 import { addProduct } from "../stores/actions/product/actionCreator";
+import InputImage from "../components/InputImage";
 
 export default function AddProductsPage() {
-  const navigate = useNavigate()
-  const { categories } = useSelector((state) => state.category)
-  const dispatch = useDispatch()
-  
+  const navigate = useNavigate();
+  const { categories } = useSelector((state) => state.category);
+  const dispatch = useDispatch();
+
   const [productForm, setProductForm] = useState({
-    name: '',
-    slug: '',
-    description: '',
-    price: '',
-    categoryId: '',
-    mainImg: ''
-  })
+    name: "",
+    slug: "",
+    description: "",
+    price: "",
+    categoryId: "",
+    mainImg: "",
+  });
+  const [imageInput, setImageInput] = useState([]);
+  const [countImg, setCountImg] = useState(0);
 
   const goToProductsPage = () => {
-    navigate('/products')
-  }
+    navigate("/products");
+  };
 
   function handleChangeFormProduct(e) {
-    const { name, value } = e.target
+    const { name, value } = e.target;
     let newInput = {
       ...productForm,
-      [name]: value
-    }
-    
-    setProductForm(newInput)
+      [name]: value,
+    };
+
+    setProductForm(newInput);
   }
 
   useEffect(() => {
-    dispatch(fetchCategories())
-  }, [])
+    dispatch(fetchCategories());
+  }, []);
+
+  function addImageInput() {
+    setCountImg(countImg + 1);
+    const newImgArr = [...imageInput, { imgUrl: "" }];
+
+    setImageInput(newImgArr);
+  }
 
   async function handleSubmitProductForm(e) {
     try {
-      e.preventDefault()
+      e.preventDefault();
       const newInput = {
         ...productForm,
-        slug: productForm.name.replaceAll(' ', '-').replace('---', '-')
-      }
-      
-      setProductForm(newInput)
-      dispatch(addProduct(newInput))
-      
-      navigate('/products')
+        slug: productForm.name.replaceAll(" ", "-").replace("---", "-"),
+        images: imageInput,
+      };
+
+      setProductForm(newInput);
+      dispatch(addProduct(newInput)).then(() => {
+        navigate("/products");
+      });
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
 
@@ -96,35 +107,65 @@ export default function AddProductsPage() {
               name="categoryId"
               onChange={handleChangeFormProduct}
               value={productForm.categoryId}
-              className="w-full select select-bordered select-sm">
-              <option value=''>Select Category</option>
-              {
-                categories.map((category, index) => {
-                  return (
-                    <option key={index} value={category.id}>{category.name}</option>
-                  )
-                })
-              }
+              className="w-full select select-bordered select-sm"
+            >
+              <option value="">Select Category</option>
+              {categories.map((category, index) => {
+                return (
+                  <option key={index} value={category.id}>
+                    {category.name}
+                  </option>
+                );
+              })}
             </select>
           </div>
         </div>
 
         <label className="mt-3 mb-1 font-medium">Main Image</label>
         <div className="flex gap-3">
-        <input
-          name="mainImg"
-          onChange={handleChangeFormProduct}
-          value={productForm.mainImg}
-          type="text"
-          placeholder="www.image.com"
-          className="w-full input input-bordered input-sm"
-        />
-        <button className="btn btn-success btn-sm">Add Images</button>
+          <input
+            name="mainImg"
+            onChange={handleChangeFormProduct}
+            value={productForm.mainImg}
+            type="text"
+            placeholder="www.image.com"
+            className="w-full input input-bordered input-sm"
+          />
         </div>
 
-        <div className="flex gap-2 mt-4">
-        <button type="submit" className="btn btn-info">Submit</button>
-        <button onClick={goToProductsPage} className="btn btn-error">Cancel</button>
+        {countImg > 0 &&
+          imageInput.map((el, index) => {
+            return (
+              <InputImage
+                key={index}
+                index={index}
+                handleChangeFormProduct={handleChangeFormProduct}
+                imageInput={imageInput}
+                setImageInput={setImageInput}
+                countImg={countImg}
+                setCountImg={setCountImg}
+              />
+            );
+          })}
+
+        <div className="flex justify-between gap-2 mt-4">
+          <div>
+            <button
+              type="button"
+              onClick={addImageInput}
+              className="btn btn-success"
+            >
+              Add Images
+            </button>
+          </div>
+          <div className="flex gap-2">
+            <button type="submit" className="btn btn-info">
+              Submit
+            </button>
+            <button onClick={goToProductsPage} className="btn btn-error">
+              Cancel
+            </button>
+          </div>
         </div>
       </form>
     </>

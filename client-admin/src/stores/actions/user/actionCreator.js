@@ -1,6 +1,8 @@
+const baseUrl = 'http://localhost:3000'
+
 export const addUser = (payload) => {
   return (dispatch, getState) => {
-    fetch('http://localhost:3000/users', {
+    fetch(baseUrl + '/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -19,13 +21,16 @@ export const addUser = (payload) => {
 
 export const loginUser = (payload) => {
   return (dispatch, getState) => {
-    return fetch(`http://localhost:3000/users?email=${payload.email}&password=${payload.password}`)
+    return fetch(baseUrl + `/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    })
     .then((res) => {
       if(!res.ok) throw new Error('Error')
       return res.json()
-    })
-    .then((data) => {
-      return data[0]
     })
   }
 }

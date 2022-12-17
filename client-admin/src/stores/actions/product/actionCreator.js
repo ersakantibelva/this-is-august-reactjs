@@ -1,8 +1,13 @@
 import { PRODUCT_CHANGEINPUTADD, PRODUCT_GETPRODUCT, PRODUCT_SETPRODUCTS } from "./actionTypes"
+const baseUrl = 'http://localhost:3000'
 
 export const fetchProducts = () => {
   return (dispatch, getState) => {
-    fetch('http://localhost:3000/products?_expand=category')
+    fetch(baseUrl + '/products', {
+      headers: {
+        access_token: localStorage.access_token
+      }
+    })
     .then((res) => {
       if (!res.ok) throw new Error('Error')
       return res.json()
@@ -19,13 +24,17 @@ export const fetchProducts = () => {
 
 export const fetchProductById = (id) => {
   return (dispatch, getState) => {
-    fetch(`http://localhost:3000/products/${id}`)
+    return fetch(baseUrl + `/products/${id}`, {
+      headers: {
+        access_token: localStorage.access_token
+      }
+    })
     .then((res) => {
       if (!res.ok) throw new Error('Error')
       return res.json()
     })
     .then((data) => {
-      dispatch({
+      return dispatch({
         type: PRODUCT_GETPRODUCT,
         payload: data
       })
@@ -35,10 +44,11 @@ export const fetchProductById = (id) => {
 
 export const addProduct = (payload) => {
   return (dispatch, getState) => {
-    fetch('http://localhost:3000/products', {
+    return fetch(baseUrl + '/products', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        access_token: localStorage.access_token
       },
       body: JSON.stringify(payload)
     })
@@ -46,18 +56,16 @@ export const addProduct = (payload) => {
       if(!res.ok) throw new Error('Error')
       return res.json()
     })
-    .then((data) => {
-      console.log(data);
-    })
   }
 }
 
 export const editProduct = (id, payload) => {
   return (dispatch, getState) => {
-    fetch(`http://localhost:3000/products/${id}_expand=category`, {
+    fetch(baseUrl + `/products/${id}`, {
       method: 'PUT',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        access_token: localStorage.access_token
       },
       body: JSON.stringify(payload)
     })
@@ -80,18 +88,16 @@ export const changeFormAddProduct = (payload) => {
 
 export const deleteProduct = (id) => {
   return (dispatch, getState) => {
-    fetch(`http://localhost:3000/products/${id}`, {
+    return fetch(baseUrl + `/products/${id}`, {
       method: 'DELETE',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        access_token: localStorage.access_token
       }
     })
     .then((res) => {
       if(!res.ok) throw new Error('Error')
       return res.json()
-    })
-    .then((data) => {
-      console.log(data);
     })
   }
 }

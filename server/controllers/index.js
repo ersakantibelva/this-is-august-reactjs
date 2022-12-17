@@ -344,6 +344,21 @@ class Controller {
     }
   }
 
+  static async showCategory(req, res, next) {
+    try {
+      const { categoryId } = req.params
+      const categories = await Category.findAll({
+        where: {
+          id: categoryId
+        }
+      })
+      
+      res.status(200).json(categories)
+    } catch (error) {
+      next(error)
+    }
+  }
+
   static async editCategory(req, res, next) {
     try {
       const { categoryId } = req.params

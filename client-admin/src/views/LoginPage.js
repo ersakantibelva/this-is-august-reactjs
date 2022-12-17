@@ -23,18 +23,17 @@ export default function LoginPage() {
   async function handleLogin(e) {
     try {
       e.preventDefault()
-  
-      const user = await dispatch(loginUser(formLogin))
-      if(!user) throw new Error('Invalid email/password')
+      console.log(formLogin);
+      const data = await dispatch(loginUser(formLogin))
+      console.log('data', data);
+      if(!data) throw new Error('Invalid email/password')
       else {
-        localStorage.setItem("access_token", "ada")
+        localStorage.setItem("access_token", data.access_token)
         navigate('/products')
       }
     } catch (error) {
       console.log(error);
     }
-
-
   }
   return (
     <>
