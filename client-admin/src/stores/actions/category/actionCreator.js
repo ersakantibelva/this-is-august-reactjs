@@ -8,9 +8,13 @@ export const fetchCategories = () => {
         access_token: localStorage.access_token
       }
     })
-    .then((res) => {
-      if(!res.ok) throw new Error ('Error')
-      return res.json()
+    .then(async (res) => {
+      if(!res.ok) {
+        const error = await res.json()
+        throw new Error(error.message)
+      } else {
+        return res.json()
+      }
     })
     .then((data) => {
       return dispatch({
@@ -23,7 +27,7 @@ export const fetchCategories = () => {
 
 export const addCategory = (payload) => {
   return (dispatch, getState) => {
-    fetch(baseUrl + '/categories', {
+    return fetch(baseUrl + '/categories', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -31,29 +35,33 @@ export const addCategory = (payload) => {
       },
       body: JSON.stringify(payload)
     })
-    .then((res) => {
-      if(!res.ok) throw new Error('Error')
-      return res.json()
-    })
-    .then((data) => {
-      console.log(data);
+    .then(async (res) => {
+      if(!res.ok) {
+        const error = await res.json()
+        throw new Error(error.message)
+      } else {
+        return res.json()
+      }
     })
   }
 }
 
 export const fetchCategoryById = (id) => {
   return (dispatch, getState) => {
-    fetch(baseUrl + `/categories/${id}`, {
+    return fetch(baseUrl + `/categories/${id}`, {
       headers: {
         access_token: localStorage.access_token
       }
     })
-    .then((res) => {
-      if(!res.ok) throw new Error('Error')
-      return res.json()
+    .then(async (res) => {
+      if(!res.ok) {
+        const error = await res.json()
+        throw new Error(error.message)
+      } else {
+        return res.json()
+      }
     })
     .then((data) => {
-      console.log(data);
       dispatch({
         type: CATEGORY_GETCATEGORY,
         payload: data
@@ -79,9 +87,13 @@ export const editCategory = (id, payload) => {
       },
       body: JSON.stringify(payload)
     })
-    .then((res) => {
-      if(!res.ok) throw new Error('Error')
-      return res.json()
+    .then(async (res) => {
+      if(!res.ok) {
+        const error = await res.json()
+        throw new Error(error.message)
+      } else {
+        return res.json()
+      }
     })
   }
 }
@@ -94,9 +106,13 @@ export const deleteCategory = (id) => {
         access_token: localStorage.access_token
       }
     })
-    .then((res) => {
-      if(!res.ok) throw new Error('Error')
-      return res.json()
+    .then(async (res) => {
+      if(!res.ok) {
+        const error = await res.json()
+        throw new Error(error.message)
+      } else {
+        return res.json()
+      }
     })
   }
 }

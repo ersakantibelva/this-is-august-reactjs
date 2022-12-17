@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
+import { swalError } from '../helpers/swal'
 import { fetchProductById } from "../stores/actions/product/actionCreator";
 
 export default function ProductDetailPage() {
@@ -9,7 +10,10 @@ export default function ProductDetailPage() {
   const { product, Images } = useSelector((state) => state.product);
 
   useEffect(() => {
-    dispatch(fetchProductById(id));
+    dispatch(fetchProductById(id))
+    .catch((err) => {
+      swalError(err.message)
+    })
   }, []);
 
   return (
@@ -19,8 +23,8 @@ export default function ProductDetailPage() {
           <Link to="/products" className="btn btn-warning">Back to Product List</Link>
         </div>
 
-        <h1 className="text-3xl font-bold mb-6">Product Images</h1>
-        <h1 className="text-xl font-medium mb-2">{product.name}</h1>
+        <h1 className="mb-6 text-3xl font-bold">Product Images</h1>
+        <h1 className="mb-2 text-xl font-medium">{product.name}</h1>
         <div className="flex flex-wrap gap-2">
         <img src={product.mainImg} width="200"/>
         {

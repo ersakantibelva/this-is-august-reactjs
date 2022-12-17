@@ -175,6 +175,7 @@ class Controller {
       if(!description) throw { message: "Description is required" }
       if(!price) throw { message: "Price is required" }
       if(!mainImg) throw { message: "Main image URL is required" }
+      if(!categoryId) throw { message: "Category is required" }
 
       const slug = name.toLowerCase().replaceAll(" ", "-").replace("---", "-")
       

@@ -2,6 +2,8 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux'
 import { useState } from "react";
 import { addCategory } from "../stores/actions/category/actionCreator";
+import { swalError, swalSuccess } from "../helpers/swal";
+import { LOADING_SETLOADER, LOADING_UNSETLOADER } from "../stores/actions/loading/actionTypes";
 
 export default function AddCategoriesPage() {
   const [categoryForm, setCateforyForm] = useState({
@@ -24,10 +26,23 @@ export default function AddCategoriesPage() {
     setCateforyForm(newInput)
   }
 
-  function handleAddCategory() {
-    dispatch(addCategory(categoryForm))
+   async function handleAddCategory(e) {
+    try {
+      dispatch({
+        type: LOADING_SETLOADER
+      })
 
-    navigate('/categories')
+      e.preventDefault()
+      await dispatch(addCategory(categoryForm))
+      await swalSuccess('Successfully to add category')
+      navigate('/categories')
+    } catch (error) {
+      await swalError(error.message)
+    } finally {
+      dispatch({
+        type: LOADING_UNSETLOADER
+      })
+    }
   }
 
   return (

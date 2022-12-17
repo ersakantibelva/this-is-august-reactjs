@@ -4,6 +4,8 @@ import {
   deleteProduct,
   fetchProducts,
 } from "../stores/actions/product/actionCreator";
+import { swalConfirmDelete, swalError, swalSuccess } from "../helpers/swal";
+import { LOADING_SETLOADER, LOADING_UNSETLOADER } from "../stores/actions/loading/actionTypes";
 
 export default function TableRowProducts(props) {
   const navigate = useNavigate();
@@ -13,10 +15,30 @@ export default function TableRowProducts(props) {
     navigate(`/products/edit/${props.product.id}`);
   }
 
-  function handleDeleteProduct() {
-    dispatch(deleteProduct(props.product.id)).then(() => {
-      dispatch(fetchProducts());
-    });
+  async function handleDeleteProduct() {
+    try {
+
+      if (!await swalConfirmDelete()) {
+       return 
+      }
+      dispatch({
+        type: LOADING_SETLOADER
+      })
+      await dispatch(deleteProduct(props.product.id))
+      await swalSuccess(`Successfully delete product ${props.product.name}`)
+    } catch (error) {
+      swalError(error.message)
+    } finally {
+      dispatch(fetchProducts())
+      .catch((err) => {
+        swalError(err.message)
+      })
+      .finally(() => {
+        dispatch({
+          type: LOADING_UNSETLOADER
+        })
+      })
+    }
   }
 
   return (
@@ -55,13 +77,13 @@ export default function TableRowProducts(props) {
           <div className="flex flex-col gap-2">
             <button
               onClick={goToEditProduct}
-              className="mr-2 btn btn-warning btn-xs w-full"
+              className="w-full mr-2 btn btn-warning btn-xs"
             >
               Edit
             </button>
             <button
               onClick={handleDeleteProduct}
-              className="btn btn-error btn-xs w-full"
+              className="w-full btn btn-error btn-xs"
             >
               Delete
             </button>

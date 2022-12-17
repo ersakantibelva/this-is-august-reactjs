@@ -1,6 +1,8 @@
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { swalConfirmDelete, swalError, swalSuccess } from "../helpers/swal";
 import { deleteCategory, fetchCategories } from "../stores/actions/category/actionCreator";
+import { LOADING_SETLOADER, LOADING_UNSETLOADER } from "../stores/actions/loading/actionTypes";
 
 export default function TableRowCategories(props) {
   const navigate = useNavigate()
@@ -10,14 +12,30 @@ export default function TableRowCategories(props) {
     navigate(`/categories/edit/${props.category.id}`)
   }
 
-  function handleDeleteCategory() {
-    dispatch(deleteCategory(props.category.id))
-    .then(() => {
-      return dispatch(fetchCategories())
-    })
-    .then(() => {
-      navigate('/categories')
-    })
+  async function handleDeleteCategory() {
+    try {
+      if (!await swalConfirmDelete()) {
+        return 
+      }
+      dispatch({
+        type: LOADING_SETLOADER
+      })
+      await dispatch(deleteCategory(props.category.id))
+      
+      await swalSuccess(`Successfully delete category ${props.category.name}`)
+    } catch (error) {
+      swalError(error.message)
+    } finally {
+      await dispatch(fetchCategories())
+      .catch((err) => {
+        swalError(err.message)
+      })
+      .finally(() => {
+        dispatch({
+          type: LOADING_UNSETLOADER
+        })
+      })
+    }
   }
 
   return (

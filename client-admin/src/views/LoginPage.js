@@ -1,7 +1,9 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../stores/actions/user/actionCreator";
+import { swalError, swalSuccess } from "../helpers/swal";
+import { LOADING_SETLOADER, LOADING_UNSETLOADER } from "../stores/actions/loading/actionTypes";
 
 export default function LoginPage() {
   const dispatch = useDispatch()
@@ -22,19 +24,27 @@ export default function LoginPage() {
 
   async function handleLogin(e) {
     try {
+      dispatch({
+        type: LOADING_SETLOADER
+      })
+
       e.preventDefault()
-      console.log(formLogin);
       const data = await dispatch(loginUser(formLogin))
-      console.log('data', data);
       if(!data) throw new Error('Invalid email/password')
       else {
         localStorage.setItem("access_token", data.access_token)
-        navigate('/products')
+        navigate('/')
+        swalSuccess('Success to login')
       }
     } catch (error) {
-      console.log(error);
+      swalError(error.message)
+    } finally {
+      dispatch({
+        type: LOADING_UNSETLOADER
+      })
     }
   }
+  
   return (
     <>
       <div className="">
