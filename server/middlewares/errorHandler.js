@@ -8,11 +8,11 @@ const errorHandler = (err, req, res, next) => {
     "Description is required",
     "Price is required",
     "Main image URL is required",
-    "Name is required"
+    "Name is required",
+    "Category is required"
   ]
 
   const notAuth = ["Invalid token", "Invalid email/password"]
-  console.log(err);
   if(badReq.includes(err.message)) {
     code = 400
     message = err.message

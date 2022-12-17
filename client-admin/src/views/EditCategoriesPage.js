@@ -2,6 +2,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from "react";
 import { changeFormEditCategory, editCategory, fetchCategoryById } from "../stores/actions/category/actionCreator";
+import { swalError, swalSuccess } from "../helpers/swal";
+import { LOADING_SETLOADER, LOADING_UNSETLOADER } from "../stores/actions/loading/actionTypes";
 
 export default function AddCategoriesPage() {
   const { id } = useParams()
@@ -23,21 +25,40 @@ export default function AddCategoriesPage() {
     dispatch(changeFormEditCategory(newInput))
   }
 
-  function handleSubmitEditCategory(e) {
-    e.preventDefault()
-    dispatch(editCategory(id, category))
-    .then(() => {
+  async function handleSubmitEditCategory(e) {
+    try {
+      dispatch({
+        type: LOADING_SETLOADER
+      })
+
+      e.preventDefault()
+      await dispatch(editCategory(id, category))
+      await swalSuccess(`Successfully edit category ${category.name}`)
       navigate('/categories')
-    })
-    .catch((err) => {
-      console.log(err);
-    })
+    } catch (error) {
+      swalError(error.message)
+    } finally {
+      dispatch({
+        type: LOADING_UNSETLOADER
+      })
+    }
   }
   
   useEffect(() => {
+    dispatch({
+      type: LOADING_SETLOADER
+    })
+    
     dispatch(fetchCategoryById(id))
+    .catch((err) => {
+      swalError(err.message)
+    })
+    .finally(() => {
+      dispatch({
+        type: LOADING_UNSETLOADER
+      })
+    })
   }, [])
-  console.log(category);
 
   return (
     <>

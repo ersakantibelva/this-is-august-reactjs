@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { swalError, swalSuccess } from "../helpers/swal";
 import { fetchCategories } from "../stores/actions/category/actionCreator";
 import { addProduct } from "../stores/actions/product/actionCreator";
 import AddInputImage from "../components/AddInputImage";
+import { LOADING_SETLOADER, LOADING_UNSETLOADER } from "../stores/actions/loading/actionTypes";
 
 export default function AddProductsPage() {
   const navigate = useNavigate();
@@ -48,6 +50,10 @@ export default function AddProductsPage() {
 
   async function handleSubmitProductForm(e) {
     try {
+      dispatch({
+        type: LOADING_SETLOADER
+      })
+
       e.preventDefault();
       const newInput = {
         ...productForm,
@@ -58,9 +64,16 @@ export default function AddProductsPage() {
       setProductForm(newInput);
       await dispatch(addProduct(newInput));
 
-      navigate("/products");
+      swalSuccess('Successfully add new product')
+      .then(() => {
+        navigate("/products");
+      })
     } catch (error) {
-      console.log(error);
+      swalError(error.message)
+    } finally {
+      dispatch({
+        type: LOADING_UNSETLOADER
+      })
     }
   }
 
@@ -133,6 +146,10 @@ export default function AddProductsPage() {
           />
         </div>
 
+        {countImg > 0 && (
+          <label className="mt-3 mb-1 font-medium">Additional Images</label>
+        )}
+        
         {countImg > 0 &&
           imageInput.map((el, index) => {
             return (

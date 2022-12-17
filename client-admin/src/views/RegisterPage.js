@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { swalError, swalSuccess } from "../helpers/swal";
+import { LOADING_SETLOADER, LOADING_UNSETLOADER } from "../stores/actions/loading/actionTypes";
 import { addUser } from "../stores/actions/user/actionCreator";
 
 export default function RegisterPage() {
@@ -22,21 +24,34 @@ export default function RegisterPage() {
     setFormUser(newInput)
   }
 
-  function handleAddUser(e) {
-    e.preventDefault()
-    const newInput = {
-      ...formUser,
-      role: 'Admin'
-    }
+  async function handleAddUser(e) {
+    try {
+      dispatch({
+        type: LOADING_SETLOADER
+      })
+      e.preventDefault()
+      const newInput = {
+        ...formUser,
+        role: 'Admin'
+      }
+  
+      await dispatch(addUser(newInput))
+      setFormUser({
+        username: '',
+        email: '',
+        password: '',
+        phoneNumber: '',
+        Address: ''
+      })
 
-    dispatch(addUser(newInput))
-    setFormUser({
-      username: '',
-      email: '',
-      password: '',
-      phoneNumber: '',
-      Address: ''
-    })
+      swalSuccess(`Successfully add user with email ${formUser.email}`)
+    } catch (error) {
+      swalError(error.message)
+    } finally {
+      dispatch({
+        type: LOADING_UNSETLOADER
+      })
+    }
   }
   
   return (

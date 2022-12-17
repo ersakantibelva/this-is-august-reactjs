@@ -3,6 +3,8 @@ import TableProducts from "../components/TableProducts";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchProducts } from "../stores/actions/product/actionCreator";
+import { swalError } from "../helpers/swal";
+import { LOADING_SETLOADER, LOADING_UNSETLOADER } from "../stores/actions/loading/actionTypes";
 
 export default function ProductsPage() {
   const navigate = useNavigate()
@@ -10,7 +12,19 @@ export default function ProductsPage() {
   const dispatch = useDispatch()
   
   useEffect(() => {
+    dispatch({
+      type: LOADING_SETLOADER
+    })
+
     dispatch(fetchProducts())
+    .catch((err) => {
+      swalError(err.message)
+    })
+    .finally(() => {
+      dispatch({
+        type: LOADING_UNSETLOADER
+      })
+    })
   }, [])
 
   function goToAddProducts() {

@@ -9,6 +9,8 @@ import {
   fetchProductById,
 } from "../stores/actions/product/actionCreator";
 import EditInputImage from "../components/EditInputImage";
+import { swalError, swalSuccess } from "../helpers/swal";
+import { LOADING_SETLOADER, LOADING_UNSETLOADER } from "../stores/actions/loading/actionTypes";
 
 export default function EditProductsPage() {
   const { id } = useParams();
@@ -33,6 +35,10 @@ export default function EditProductsPage() {
 
   async function handleSubmitProductForm(e) {
     try {
+      dispatch({
+        type: LOADING_SETLOADER
+      })
+
       e.preventDefault();
       const newInput = {
         ...product,
@@ -40,23 +46,38 @@ export default function EditProductsPage() {
         slug: product.name.replaceAll(" ", "-").replace("---", "-"),
       };
 
-      dispatch(editProduct(id, newInput))
-      .then(() => {
-        navigate("/products");
-      })
+      await dispatch(editProduct(id, newInput))
+      await swalSuccess('Successfully to edit product')
+      navigate("/products");
     } catch (error) {
-      console.log(error);
+      swalError(error.message)
+    } finally {
+      dispatch({
+        type: LOADING_UNSETLOADER
+      })
     }
   }
 
   useEffect(() => {
-    dispatch(fetchCategories()).then(() => {
+    dispatch({
+      type: LOADING_SETLOADER
+    })
+
+    dispatch(fetchCategories())
+    .then(() => {
       return dispatch(fetchProductById(id));
-    });
+    })
+    .catch((error) => {
+      swalError(error.message)
+    })
+    .finally(() => {
+      dispatch({
+        type: LOADING_UNSETLOADER
+      })
+    })
   }, []);
 
 
-  console.log('images', Images);
   function addImageInput() {
     const newInput = [
       ...Images,
@@ -137,6 +158,10 @@ export default function EditProductsPage() {
             className="w-full input input-bordered input-sm"
           />
         </div>
+
+        {Images.length > 0 && (
+          <label className="mt-3 mb-1 font-medium">Additional Images</label>
+        )}
 
         {Images.length > 0 &&
           Images.map((el, index) => {

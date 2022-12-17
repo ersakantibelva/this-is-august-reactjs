@@ -3,14 +3,18 @@ const baseUrl = 'http://localhost:3000'
 
 export const fetchProducts = () => {
   return (dispatch, getState) => {
-    fetch(baseUrl + '/products', {
+    return fetch(baseUrl + '/products', {
       headers: {
         access_token: localStorage.access_token
       }
     })
-    .then((res) => {
-      if (!res.ok) throw new Error('Error')
-      return res.json()
+    .then(async (res) => {
+      if(!res.ok) {
+        const error = await res.json()
+        throw new Error(error.message)
+      } else {
+        return res.json()
+      }
     })
     .then((data) => {
       dispatch({
@@ -18,7 +22,6 @@ export const fetchProducts = () => {
         payload: data
       })
     })
-    .catch((err) => console.log(err))
   }
 }
 
@@ -29,9 +32,13 @@ export const fetchProductById = (id) => {
         access_token: localStorage.access_token
       }
     })
-    .then((res) => {
-      if (!res.ok) throw new Error('Error')
-      return res.json()
+    .then(async (res) => {
+      if(!res.ok) {
+        const error = await res.json()
+        throw new Error(error.message)
+      } else {
+        return res.json()
+      }
     })
     .then((data) => {
       return dispatch({
@@ -107,9 +114,13 @@ export const deleteProduct = (id) => {
         access_token: localStorage.access_token
       }
     })
-    .then((res) => {
-      if(!res.ok) throw new Error('Error')
-      return res.json()
+    .then(async (res) => {
+      if(!res.ok) {
+        const error = await res.json()
+        throw new Error(error.message)
+      } else {
+        return res.json()
+      }
     })
   }
 }

@@ -24,7 +24,6 @@ module.exports = {
     const products = require('../db.json').products
     .map(el => {
       delete el.id
-      el.authorId = 1
       el.createdAt = new Date()
       el.updatedAt = new Date()
       return el

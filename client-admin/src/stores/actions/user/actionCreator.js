@@ -2,19 +2,21 @@ const baseUrl = 'http://localhost:3000'
 
 export const addUser = (payload) => {
   return (dispatch, getState) => {
-    fetch(baseUrl + '/register', {
+    return fetch(baseUrl + '/register', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        access_token: localStorage.access_token
       },
       body: JSON.stringify(payload)
     })
-    .then((res) => {
-      if(!res.ok) throw new Error('Error')
-      return res.json()
-    })
-    .then((data) => {
-      console.log(data, `Success to add admin ${data.username}`);
+    .then(async (res) => {
+      if(!res.ok) {
+        const error = await res.json()
+        throw new Error(error.message)
+      } else {
+        return res.json()
+      }
     })
   }
 }
@@ -28,9 +30,13 @@ export const loginUser = (payload) => {
       },
       body: JSON.stringify(payload)
     })
-    .then((res) => {
-      if(!res.ok) throw new Error('Error')
-      return res.json()
+    .then(async (res) => {
+      if(!res.ok) {
+        const error = await res.json()
+        throw new Error(error.message)
+      } else {
+        return res.json()
+      }
     })
   }
 }
