@@ -8,6 +8,7 @@ import EditCategoriesPage from "../views/EditCategoriesPage";
 import RegisterPage from "../views/RegisterPage";
 import Root from "../views/Root";
 import LoginPage from "../views/LoginPage";
+import HomePage from "../views/HomePage";
 
 const router = createBrowserRouter([
   {
@@ -23,7 +24,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <h1>Homepage</h1>
+        element: <HomePage />
       },
       {
         path: "products",

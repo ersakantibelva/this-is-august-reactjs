@@ -22,7 +22,6 @@ export default function EditInputImage(props) {
     ]
     .filter((el, idx) => idx != props.index)
 
-    console.log(newInput);
     dispatch({
       type: PRODUCT_CHANGEFORMEDITIMAGE,
       payload: newInput

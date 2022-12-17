@@ -28,7 +28,6 @@ export default function EditProductsPage() {
       Images,
       [name]: value,
     };
-    console.log(newInput);
     dispatch(changeFormAddProduct(newInput));
   }
 
@@ -67,12 +66,7 @@ export default function EditProductsPage() {
       }
     ]
 
-    console.log('newInput', newInput);
-
     dispatch(changeFormEditImage(newInput))
-    // .then(() => {
-    //   console.log(Images);
-    // })
   }
   
   return (
