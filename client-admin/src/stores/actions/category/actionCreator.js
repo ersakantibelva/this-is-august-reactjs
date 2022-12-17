@@ -3,7 +3,7 @@ const baseUrl = 'http://localhost:3000'
 
 export const fetchCategories = () => {
   return (dispatch, getState) => {
-    fetch(baseUrl + '/categories', {
+    return fetch(baseUrl + '/categories', {
       headers: {
         access_token: localStorage.access_token
       }
@@ -13,7 +13,7 @@ export const fetchCategories = () => {
       return res.json()
     })
     .then((data) => {
-      dispatch({
+      return dispatch({
         type: CATEGORY_SETCATEGORIES,
         payload: data
       })

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchCategories } from "../stores/actions/category/actionCreator";
 import { addProduct } from "../stores/actions/product/actionCreator";
-import InputImage from "../components/InputImage";
+import AddInputImage from "../components/AddInputImage";
 
 export default function AddProductsPage() {
   const navigate = useNavigate();
@@ -56,9 +56,9 @@ export default function AddProductsPage() {
       };
 
       setProductForm(newInput);
-      dispatch(addProduct(newInput)).then(() => {
-        navigate("/products");
-      });
+      await dispatch(addProduct(newInput));
+
+      navigate("/products");
     } catch (error) {
       console.log(error);
     }
@@ -136,7 +136,7 @@ export default function AddProductsPage() {
         {countImg > 0 &&
           imageInput.map((el, index) => {
             return (
-              <InputImage
+              <AddInputImage
                 key={index}
                 index={index}
                 handleChangeFormProduct={handleChangeFormProduct}

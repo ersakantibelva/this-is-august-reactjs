@@ -7,7 +7,8 @@ const errorHandler = (err, req, res, next) => {
     "Password is required",
     "Description is required",
     "Price is required",
-    "Main image URL is required"
+    "Main image URL is required",
+    "Name is required"
   ]
 
   const notAuth = ["Invalid token", "Invalid email/password"]

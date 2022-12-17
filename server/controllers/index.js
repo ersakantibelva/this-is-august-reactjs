@@ -227,7 +227,7 @@ class Controller {
 
     try {
       const { productId } = req.params
-      const { name, description, price, mainImg, categoryId, images } = req.body
+      const { name, description, price, mainImg, categoryId, Images: images } = req.body
       if(!name) throw { message: "Name is required" }
       if(!description) throw { message: "Description is required" }
       if(!price) throw { message: "Price is required" }

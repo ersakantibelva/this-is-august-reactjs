@@ -1,6 +1,11 @@
-export default function InputImage(props) {
+export default function AddInputImage(props) {
   function deleteImageInput(e) {
     props.setCountImg(props.countImg - 1);
+    const newImgArr = [
+      ...props.imageInput
+    ].filter((el, idx) => idx != props.index)
+
+    props.setImageInput(newImgArr)
   }
 
   function handleChangeImageInput(e) {

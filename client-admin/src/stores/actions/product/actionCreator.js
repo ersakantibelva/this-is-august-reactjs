@@ -1,4 +1,4 @@
-import { PRODUCT_CHANGEINPUTADD, PRODUCT_GETPRODUCT, PRODUCT_SETPRODUCTS } from "./actionTypes"
+import { PRODUCT_CHANGEFORMEDITIMAGE, PRODUCT_CHANGEINPUTADD, PRODUCT_GETPRODUCT, PRODUCT_SETPRODUCTS } from "./actionTypes"
 const baseUrl = 'http://localhost:3000'
 
 export const fetchProducts = () => {
@@ -52,16 +52,20 @@ export const addProduct = (payload) => {
       },
       body: JSON.stringify(payload)
     })
-    .then((res) => {
-      if(!res.ok) throw new Error('Error')
-      return res.json()
+    .then(async (res) => {
+      if(!res.ok) {
+        const error = await res.json()
+        throw new Error(error.message)
+      } else {
+        return res.json()
+      }
     })
   }
 }
 
 export const editProduct = (id, payload) => {
   return (dispatch, getState) => {
-    fetch(baseUrl + `/products/${id}`, {
+    return fetch(baseUrl + `/products/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -69,12 +73,13 @@ export const editProduct = (id, payload) => {
       },
       body: JSON.stringify(payload)
     })
-    .then((res) => {
-      if(!res.ok) throw new Error('Error')
-      return res.json()
-    })
-    .then((data) => {
-      console.log(data);
+    .then(async (res) => {
+      if(!res.ok) {
+        const error = await res.json()
+        throw new Error(error.message)
+      } else {
+        return res.json()
+      }
     })
   }
 }
@@ -82,6 +87,13 @@ export const editProduct = (id, payload) => {
 export const changeFormAddProduct = (payload) => {
   return {
     type: PRODUCT_CHANGEINPUTADD,
+    payload
+  }
+}
+
+export const changeFormEditImage = (payload) => {
+  return {
+    type: PRODUCT_CHANGEFORMEDITIMAGE,
     payload
   }
 }
