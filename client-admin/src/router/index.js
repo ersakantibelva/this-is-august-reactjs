@@ -1,67 +1,77 @@
-import { createBrowserRouter, redirect } from 'react-router-dom'
-import ProductsPage from '../views/ProductsPage'
-import AddProductsPage from '../views/AddProductsPage'
-import EditProductsPage from '../views/EditProductsPage'
-import CategoriesPage from '../views/CategoriesPage'
-import AddCategoriesPage from '../views/AddCategoriesPage'
-import EditCategoriesPage from '../views/EditCategoriesPage'
-import RegisterPage from '../views/RegisterPage'
-import Root from '../views/Root'
-import LoginPage from '../views/LoginPage'
+import { createBrowserRouter, redirect } from "react-router-dom";
+import ProductsPage from "../views/ProductsPage";
+import AddProductsPage from "../views/AddProductsPage";
+import EditProductsPage from "../views/EditProductsPage";
+import CategoriesPage from "../views/CategoriesPage";
+import AddCategoriesPage from "../views/AddCategoriesPage";
+import EditCategoriesPage from "../views/EditCategoriesPage";
+import RegisterPage from "../views/RegisterPage";
+import Root from "../views/Root";
+import LoginPage from "../views/LoginPage";
+import HomePage from "../views/HomePage";
+import ProductDetailPage from "../views/ProductDetailPage";
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <Root />,
     loader: () => {
-      const token = localStorage.getItem("access_token")
-      if(!token) {
-        return redirect('/login')
+      const token = localStorage.getItem("access_token");
+      if (!token) {
+        return redirect("/login");
       }
-      return token
+      return token;
     },
     children: [
       {
-        path: 'products',
-        element: <ProductsPage />
+        path: "",
+        element: <HomePage />
       },
       {
-        path: 'products/add',
-        element: <AddProductsPage />
+        path: "products",
+        element: <ProductsPage />,
       },
       {
-        path: 'products/edit/:id',
-        element: <EditProductsPage />
+        path: "products/:id",
+        element: <ProductDetailPage />,
       },
       {
-        path: 'categories',
-        element: <CategoriesPage />
+        path: "products/add",
+        element: <AddProductsPage />,
       },
       {
-        path: 'categories/add',
-        element: <AddCategoriesPage />
+        path: "products/edit/:id",
+        element: <EditProductsPage />,
       },
       {
-        path: 'categories/edit/:id',
-        element: <EditCategoriesPage />
+        path: "categories",
+        element: <CategoriesPage />,
       },
       {
-        path: 'register',
-        element: <RegisterPage />
-      }
-    ]
+        path: "categories/add",
+        element: <AddCategoriesPage />,
+      },
+      {
+        path: "categories/edit/:id",
+        element: <EditCategoriesPage />,
+      },
+      {
+        path: "register",
+        element: <RegisterPage />,
+      },
+    ],
   },
   {
-    path: '/login',
+    path: "/login",
     element: <LoginPage />,
     loader: () => {
-      const token = localStorage.getItem("access_token")
-      if(token) {
-        return redirect('/products')
+      const token = localStorage.getItem("access_token");
+      if (token) {
+        return redirect("/products");
       }
-      return token
-    }
-  }
-])
+      return token;
+    },
+  },
+]);
 
-export default router
+export default router;

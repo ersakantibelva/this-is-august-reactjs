@@ -1,60 +1,74 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { fetchCategories } from "../stores/actions/category/actionCreator";
-import { changeFormAddProduct, fetchProductById } from "../stores/actions/product/actionCreator";
+import {
+  changeFormAddProduct,
+  changeFormEditImage,
+  editProduct,
+  fetchProductById,
+} from "../stores/actions/product/actionCreator";
+import EditInputImage from "../components/EditInputImage";
 
 export default function EditProductsPage() {
-  const { id } = useParams()
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
-  const { product } = useSelector((state) => state.product)
-  const { categories } = useSelector((state) => state.category)
-  
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { product, Images } = useSelector((state) => state.product);
+  const { categories } = useSelector((state) => state.category);
+
   const goToProductsPage = () => {
-    navigate('/products')
-  }
+    navigate("/products");
+  };
 
   function handleChangeFormProduct(e) {
-    const { name, value } = e.target
+    const { name, value } = e.target;
     let newInput = {
       ...product,
-      [name]: value
-    }
-    
-    dispatch(changeFormAddProduct(newInput))
+      Images,
+      [name]: value,
+    };
+    dispatch(changeFormAddProduct(newInput));
   }
 
   async function handleSubmitProductForm(e) {
     try {
-      e.preventDefault()
+      e.preventDefault();
       const newInput = {
         ...product,
-        slug: product.name.replaceAll(' ', '-').replace('---', '-')
-      }
-      
-      dispatch(changeFormAddProduct(newInput))
-  
-      const response = await fetch(`http://localhost:3000/products/${id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(newInput)
+        Images,
+        slug: product.name.replaceAll(" ", "-").replace("---", "-"),
+      };
+
+      dispatch(editProduct(id, newInput))
+      .then(() => {
+        navigate("/products");
       })
-      
-      const data = response.json()
-      navigate('/products')
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
 
-  useEffect( () => {
-    dispatch(fetchCategories())
-    dispatch(fetchProductById(id))
-  }, [])
+  useEffect(() => {
+    dispatch(fetchCategories()).then(() => {
+      return dispatch(fetchProductById(id));
+    });
+  }, []);
 
+
+  console.log('images', Images);
+  function addImageInput() {
+    const newInput = [
+      ...Images,
+      {
+        productId: Number(id),
+        imgUrl: ""
+      }
+    ]
+
+    dispatch(changeFormEditImage(newInput))
+  }
+  
   return (
     <>
       <h1 className="mb-4 text-2xl font-bold text-center">Edit Product</h1>
@@ -98,35 +112,56 @@ export default function EditProductsPage() {
               name="categoryId"
               onChange={handleChangeFormProduct}
               value={product.categoryId}
-              className="w-full select select-bordered select-sm">
-              <option value=''>Select Category</option>
-              {
-                categories.map((category, index) => {
-                  return (
-                    <option key={index} value={category.id}>{category.name}</option>
-                  )
-                })
-              }
+              className="w-full select select-bordered select-sm"
+            >
+              <option value="">Select Category</option>
+              {categories.map((category, index) => {
+                return (
+                  <option key={index} value={category.id}>
+                    {category.name}
+                  </option>
+                );
+              })}
             </select>
           </div>
         </div>
 
         <label className="mt-3 mb-1 font-medium">Main Image</label>
         <div className="flex gap-3">
-        <input
-          name="mainImg"
-          onChange={handleChangeFormProduct}
-          value={product.mainImg}
-          type="text"
-          placeholder="www.image.com"
-          className="w-full input input-bordered input-sm"
-        />
-        <button className="btn btn-success btn-sm">Add Images</button>
+          <input
+            name="mainImg"
+            onChange={handleChangeFormProduct}
+            value={product.mainImg}
+            type="text"
+            placeholder="www.image.com"
+            className="w-full input input-bordered input-sm"
+          />
         </div>
 
-        <div className="flex gap-2 mt-4">
-        <button type="submit" className="btn btn-info">Submit</button>
-        <button onClick={goToProductsPage} className="btn btn-error">Cancel</button>
+        {Images.length > 0 &&
+          Images.map((el, index) => {
+            return <EditInputImage key={index} index={index} Images={Images} />;
+          })}
+
+        <div className="flex justify-between gap-2 mt-4">
+          <div>
+            <button
+              type="button"
+              onClick={addImageInput}
+              className="btn btn-success"
+            >
+              Add Images
+            </button>
+          </div>
+
+          <div className="flex gap-2">
+            <button type="submit" className="btn btn-info">
+              Submit
+            </button>
+            <button onClick={goToProductsPage} className="btn btn-error">
+              Cancel
+            </button>
+          </div>
         </div>
       </form>
     </>

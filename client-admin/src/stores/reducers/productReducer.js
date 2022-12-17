@@ -1,4 +1,4 @@
-import { PRODUCT_CHANGEINPUTADD, PRODUCT_GETPRODUCT, PRODUCT_SETPRODUCTS } from "../actions/product/actionTypes";
+import { PRODUCT_CHANGEFORMEDITIMAGE, PRODUCT_CHANGEINPUTADD, PRODUCT_GETPRODUCT, PRODUCT_SETPRODUCTS } from "../actions/product/actionTypes";
 
 const initialState = {
   products: [],
@@ -8,7 +8,8 @@ const initialState = {
     price: 0,
     categoryId: '',
     mainImg: ''
-  }
+  },
+  Images: []
 }
 
 export function productReducer(state = initialState, action) {
@@ -27,8 +28,16 @@ export function productReducer(state = initialState, action) {
           description: action.payload.description,
           price: action.payload.price,
           categoryId: action.payload.categoryId,
-          mainImg: action.payload.mainImg
-        }
+          mainImg: action.payload.mainImg,
+        },
+        Images: action.payload.Images
+      }
+      break;
+    
+    case PRODUCT_CHANGEFORMEDITIMAGE:
+      return {
+        ...state,
+        Images: action.payload
       }
       break;
 

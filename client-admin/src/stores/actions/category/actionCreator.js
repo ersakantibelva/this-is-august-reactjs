@@ -1,14 +1,19 @@
 import { CATEGORY_CHANGEINPUTEDIT, CATEGORY_GETCATEGORY, CATEGORY_SETCATEGORIES } from "./actionTypes"
+const baseUrl = 'http://localhost:3000'
 
 export const fetchCategories = () => {
   return (dispatch, getState) => {
-    fetch('http://localhost:3000/categories')
+    return fetch(baseUrl + '/categories', {
+      headers: {
+        access_token: localStorage.access_token
+      }
+    })
     .then((res) => {
       if(!res.ok) throw new Error ('Error')
       return res.json()
     })
     .then((data) => {
-      dispatch({
+      return dispatch({
         type: CATEGORY_SETCATEGORIES,
         payload: data
       })
@@ -18,10 +23,11 @@ export const fetchCategories = () => {
 
 export const addCategory = (payload) => {
   return (dispatch, getState) => {
-    fetch('http://localhost:3000/categories', {
+    fetch(baseUrl + '/categories', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        access_token: localStorage.access_token
       },
       body: JSON.stringify(payload)
     })
@@ -37,7 +43,11 @@ export const addCategory = (payload) => {
 
 export const fetchCategoryById = (id) => {
   return (dispatch, getState) => {
-    fetch(`http://localhost:3000/categories/${id}`)
+    fetch(baseUrl + `/categories/${id}`, {
+      headers: {
+        access_token: localStorage.access_token
+      }
+    })
     .then((res) => {
       if(!res.ok) throw new Error('Error')
       return res.json()
@@ -60,10 +70,11 @@ export const changeFormEditCategory = (payload) => {
 
 export const editCategory = (id, payload) => {
   return (dispatch, getState) => {
-    fetch(`http://localhost:3000/categories/${id}`, {
+    fetch(baseUrl + `/categories/${id}`, {
       method: 'PUT',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        access_token: localStorage.access_token
       },
       body: JSON.stringify(payload)
     })
@@ -79,8 +90,11 @@ export const editCategory = (id, payload) => {
 
 export const deleteCategory = (id) => {
   return (dispatch, getState) => {
-    fetch(`http://localhost:3000/categories/${id}`, {
-      method: 'DELETE'
+    fetch(baseUrl + `/categories/${id}`, {
+      method: 'DELETE',
+      headers: {
+        access_token: localStorage.access_token
+      }
     })
     .then((res) => {
       if(!res.ok) throw new Error('Error')
