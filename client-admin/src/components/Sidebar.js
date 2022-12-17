@@ -44,7 +44,7 @@ export default function Sidebar() {
 
             <a
               onClick={handleLogOut}
-              className="flex items-center rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+              className="cursor-pointer flex items-center rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700"
             >
               <span className="ml-3 text-sm font-medium"> Sign Out </span>
             </a>

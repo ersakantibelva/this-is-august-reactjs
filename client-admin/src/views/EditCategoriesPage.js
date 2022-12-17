@@ -24,14 +24,14 @@ export default function AddCategoriesPage() {
   }
 
   function handleSubmitEditCategory(e) {
-    try {
-      e.preventDefault()
-      dispatch(editCategory(id, category))
-      
+    e.preventDefault()
+    dispatch(editCategory(id, category))
+    .then(() => {
       navigate('/categories')
-    } catch (error) {
-      
-    }
+    })
+    .catch((err) => {
+      console.log(err);
+    })
   }
   
   useEffect(() => {

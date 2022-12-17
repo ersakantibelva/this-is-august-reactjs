@@ -53,6 +53,7 @@ export const fetchCategoryById = (id) => {
       return res.json()
     })
     .then((data) => {
+      console.log(data);
       dispatch({
         type: CATEGORY_GETCATEGORY,
         payload: data
@@ -70,7 +71,7 @@ export const changeFormEditCategory = (payload) => {
 
 export const editCategory = (id, payload) => {
   return (dispatch, getState) => {
-    fetch(baseUrl + `/categories/${id}`, {
+    return fetch(baseUrl + `/categories/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -82,15 +83,12 @@ export const editCategory = (id, payload) => {
       if(!res.ok) throw new Error('Error')
       return res.json()
     })
-    .then((data) => {
-      console.log(data);
-    })
   }
 }
 
 export const deleteCategory = (id) => {
   return (dispatch, getState) => {
-    fetch(baseUrl + `/categories/${id}`, {
+    return fetch(baseUrl + `/categories/${id}`, {
       method: 'DELETE',
       headers: {
         access_token: localStorage.access_token
@@ -99,9 +97,6 @@ export const deleteCategory = (id) => {
     .then((res) => {
       if(!res.ok) throw new Error('Error')
       return res.json()
-    })
-    .then((data) => {
-      console.log(data);
     })
   }
 }

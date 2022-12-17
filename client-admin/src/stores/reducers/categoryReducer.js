@@ -14,6 +14,11 @@ export const categoryReducer = (state = initialState, action) => {
       break;
     
     case CATEGORY_GETCATEGORY:
+      return {
+        ...state,
+        category: action.payload[0]
+      }
+      break;
     case CATEGORY_CHANGEINPUTEDIT:
       return {
         ...state,
