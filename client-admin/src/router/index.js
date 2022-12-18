@@ -10,6 +10,7 @@ import Root from "../views/Root";
 import LoginPage from "../views/LoginPage";
 import HomePage from "../views/HomePage";
 import ProductDetailPage from "../views/ProductDetailPage";
+import NotFoundPage from "../views/NotFoundPage";
 
 const router = createBrowserRouter([
   {
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
         path: "register",
         element: <RegisterPage />,
       },
+      {
+        path: "*",
+        element: <NotFoundPage />
+      }
     ],
   },
   {

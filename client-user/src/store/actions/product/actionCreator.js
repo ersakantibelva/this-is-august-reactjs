@@ -1,6 +1,6 @@
 import { PRODUCT_GETPRODUCT, PRODUCT_SETPRODUCTS } from "./actionType"
 
-const baseUrl = 'http://localhost:3000'
+const baseUrl = 'https://h8-p3-c1-belva.foxhub.space'
 
 export const fetchProducts = () => {
   return (dispatch, getState) => {

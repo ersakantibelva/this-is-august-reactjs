@@ -1,11 +1,12 @@
-import { PRODUCT_GETPRODUCT, PRODUCT_SETPRODUCTS } from "../actions/product/actionType";
+import { LOADING_SETLOADING, LOADING_UNSETLOADING, PRODUCT_GETPRODUCT, PRODUCT_SETPRODUCTS } from "../actions/product/actionType";
 
 const initialState = {
   currentPage: 0,
   totalPages: 0,
   totalProduct: 0,
   products: [],
-  product: {}
+  product: {},
+  loading: false
 };
 
 export const productReducer = (state = initialState, action) => {
@@ -20,10 +21,24 @@ export const productReducer = (state = initialState, action) => {
       };
       break;
 
-      case PRODUCT_GETPRODUCT:
+    case PRODUCT_GETPRODUCT:
       return {
         ...state,
         product: action.payload
+      };
+      break;
+
+    case LOADING_SETLOADING:
+      return {
+        ...state,
+        loading: true
+      };
+      break;
+
+    case LOADING_UNSETLOADING:
+      return {
+        ...state,
+        loading: false
       };
       break;
 
