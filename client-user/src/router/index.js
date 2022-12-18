@@ -12,7 +12,7 @@ export const router = createBrowserRouter([
         element: <LandingPage />
       },
       {
-        path: "category/:category",
+        path: "category/:categoryName",
         element: <h1>per category</h1>
       },
       {
