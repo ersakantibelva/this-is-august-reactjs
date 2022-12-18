@@ -9,6 +9,7 @@ export default function ProductDetailPage() {
   const { product } = useSelector((state) => state);
 
   useEffect(() => {
+    console.log('masuk');
     dispatch(fetchProduct(slug));
   }, []);
 

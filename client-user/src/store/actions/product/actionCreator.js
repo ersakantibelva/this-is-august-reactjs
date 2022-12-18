@@ -27,6 +27,7 @@ export const fetchProduct = (slug) => {
   return (dispatch, getState) => {
     return fetch(baseUrl + '/pub/products/' + slug)
     .then(async (res) => {
+      console.log(res);
       if(!res.ok) {
         const error = await res.json()
         throw new Error(error.message)
