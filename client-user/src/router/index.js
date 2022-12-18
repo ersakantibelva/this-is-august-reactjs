@@ -1,6 +1,7 @@
 import RootPage from "../views.js/RootPage";
 import { createBrowserRouter } from "react-router-dom";
 import LandingPage from "../views.js/LandingPage";
+import ProductDetailPage from "../views.js/ProductDetailPage";
 
 export const router = createBrowserRouter([
   {
@@ -12,12 +13,8 @@ export const router = createBrowserRouter([
         element: <LandingPage />
       },
       {
-        path: "category/:category",
-        element: <h1>per category</h1>
-      },
-      {
         path: "product/:slug",
-        element: <h1>per product</h1>
+        element: <ProductDetailPage />
       }
     ]
   }

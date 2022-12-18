@@ -1,5 +1,5 @@
 import { CATEGORY_CHANGEINPUTEDIT, CATEGORY_GETCATEGORY, CATEGORY_SETCATEGORIES } from "./actionTypes"
-const baseUrl = 'http://localhost:3000'
+const baseUrl = 'https://h8-p3-c1-belva.foxhub.space'
 
 export const fetchCategories = () => {
   return (dispatch, getState) => {

@@ -5,7 +5,7 @@ import { Outlet } from 'react-router-dom'
 export default function RootPage() {
   return (
     <>
-      <div className="mx-auto flex flex-col w-screen h-screen bg-white">
+      <div className="flex flex-col min-h-screen mx-auto max-w-screen">
         <Navbar />
         <div className="h-full">
           <Outlet />

@@ -1,5 +1,5 @@
 import { PRODUCT_CHANGEFORMEDITIMAGE, PRODUCT_CHANGEINPUTADD, PRODUCT_GETPRODUCT, PRODUCT_SETPRODUCTS } from "./actionTypes"
-const baseUrl = 'http://localhost:3000'
+const baseUrl = 'https://h8-p3-c1-belva.foxhub.space'
 
 export const fetchProducts = () => {
   return (dispatch, getState) => {

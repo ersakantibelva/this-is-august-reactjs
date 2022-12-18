@@ -30,7 +30,7 @@ class Controller {
     try {
       const { page, search } = req.query
       const options = {
-        limit: 9
+        limit: 8
       }
 
       if(search) {
@@ -59,11 +59,14 @@ class Controller {
     }
   }
 
-  static async showProductByIdPub(req, res, next) {
+  static async showProductBySlug(req, res, next) {
     try {
-      const { productId } = req.params
+      const { slug } = req.params
 
-      const product = await Product.findByPk(productId, {
+      const product = await Product.findOne({
+        where: {
+          slug
+        },
         include: [Category, Image]
       })
       if(!product) throw { message: 'Data is not found' }
@@ -76,13 +79,24 @@ class Controller {
 
   static async showProductByCategoryPub(req, res, next) {
     try {
-      const { categoryId } = req.params
+      const { categoryName } = req.params
       const { page, search } = req.query
-      const options = {
-        limit: 9,
+
+      const category = await Category.findOne({
         where: {
-          categoryId
+          name: {
+            [Op.iLike]: `%${categoryName}%`
+          }
         }
+      })
+      if(!category) throw { message: 'Data is not found' }
+
+      const options = {
+        limit: 8,
+        where: {
+          categoryId: category.id
+        },
+        include: [Category]
       }
 
       if(search) {
@@ -104,6 +118,7 @@ class Controller {
         totalProduct: count,
         totalPages: Math.ceil(count / options.limit),
         currentPage: page ? Number(page) : 1,
+        category,
         products: rows
       })
     } catch (error) {
