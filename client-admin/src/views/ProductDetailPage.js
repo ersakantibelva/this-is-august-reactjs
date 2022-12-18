@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { swalError } from '../helpers/swal'
+import { LOADING_SETLOADER, LOADING_UNSETLOADER } from "../stores/actions/loading/actionTypes";
 import { fetchProductById } from "../stores/actions/product/actionCreator";
 
 export default function ProductDetailPage() {
@@ -10,9 +11,17 @@ export default function ProductDetailPage() {
   const { product, Images } = useSelector((state) => state.product);
 
   useEffect(() => {
+    dispatch({
+      type: LOADING_SETLOADER
+    })
     dispatch(fetchProductById(id))
     .catch((err) => {
       swalError(err.message)
+    })
+    .finally(() => {
+      dispatch({
+        type: LOADING_UNSETLOADER
+      })
     })
   }, []);
 

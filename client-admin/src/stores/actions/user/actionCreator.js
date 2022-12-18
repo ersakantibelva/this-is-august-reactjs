@@ -1,4 +1,4 @@
-const baseUrl = 'http://localhost:3000'
+const baseUrl = 'https://h8-p3-c1-belva.foxhub.space'
 
 export const addUser = (payload) => {
   return (dispatch, getState) => {
