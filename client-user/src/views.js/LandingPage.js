@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchProducts } from "../store/actions/product/actionCreator";
+import { LOADING_SETLOADING, LOADING_UNSETLOADING } from "../store/actions/product/actionType";
 
 export default function LandingPage() {
   const dispatch = useDispatch();
@@ -10,7 +11,15 @@ export default function LandingPage() {
   );
 
   useEffect(() => {
-    dispatch(fetchProducts());
+    dispatch({
+      type: LOADING_SETLOADING
+    })
+    dispatch(fetchProducts())
+    .finally(() => {
+      dispatch({
+        type: LOADING_UNSETLOADING
+      })
+    })
   }, []);
 
   return (
