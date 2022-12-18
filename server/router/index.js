@@ -4,8 +4,8 @@ const router = require('express').Router()
 
 router.post('/login', Controller.login)
 router.get('/pub/products', Controller.showProductsPub)
-router.get('/pub/products/:productId', Controller.showProductByIdPub)
-router.get('/pub/categories/:categoryId/products', Controller.showProductByCategoryPub)
+router.get('/pub/products/:slug', Controller.showProductBySlug)
+router.get('/pub/categories/:categoryName/products', Controller.showProductByCategoryPub)
 
 router.use(authentication)
 

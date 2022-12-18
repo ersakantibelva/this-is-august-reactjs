@@ -13,8 +13,6 @@ export default function LandingPage() {
     dispatch(fetchProducts());
   }, []);
 
-  // console.log(currentPage, totalPages, totalProduct, products);
-
   return (
     <>
       <div className="h-fit">
@@ -79,8 +77,9 @@ export default function LandingPage() {
           </nav>
 
           <div className="grid grid-cols-4 gap-6">
-            {products.map((el) => {
+            {products.map((el, index) => {
               return (
+                <div key={index}>
                 <Link to={`/product/${el.slug}`}>
                   <img
                     className="w-full"
@@ -91,6 +90,7 @@ export default function LandingPage() {
                   </p>
                   <p className="font-semibold text-left">Rp{el.price.toLocaleString("id-ID")},00</p>
                 </Link>
+                </div>
               )
             })}
           </div>
